@@ -1,0 +1,2674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkipOwls — 90%+ US Contact Rates for Egyptian Outbound Agencies</title>
+  <meta name="description" content="Verified US property owner data for Egyptian outbound agencies. 90%+ contact rate guarantee. 3¢ per record. 48-hour delivery. 2,000 records free." />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    
+    .pain-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .pain-label {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 48px;
+      display: block;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.4;
+    }
+    .pain-timeline {
+      position: relative;
+    }
+    .pain-track {
+      position: absolute;
+      left: 19px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .pain-block {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 0 20px;
+      margin-bottom: 52px;
+      opacity: 0.15;
+      filter: grayscale(0.5);
+      transition: opacity 600ms ease-out, filter 600ms ease-out;
+    }
+    .pain-block.is-visible {
+      opacity: 1;
+      filter: grayscale(0);
+    }
+    .pain-node {
+      display: flex;
+      justify-content: center;
+      padding-top: 2px;
+      position: relative;
+      z-index: 1;
+    }
+    .pain-node__ring {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 600ms ease, box-shadow 600ms ease, background 600ms ease;
+    }
+    .pain-block.is-visible .pain-node__ring {
+      border-color: #7C2CFF;
+      background: rgba(124, 44, 255, 0.12);
+      box-shadow: 0 0 0 4px rgba(124, 44, 255, 0.12), 0 0 20px rgba(124, 44, 255, 0.25);
+    }
+    .pain-node__num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.25);
+      transition: color 600ms ease;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .pain-block.is-visible .pain-node__num {
+      color: #a970ff;
+    }
+    .pain-content { padding-top: 6px; }
+    .pain-day {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.40);
+      margin: 0 0 10px 0;
+      transition: color 600ms ease;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .pain-block.is-visible .pain-day {
+      color: rgba(255,255,255,0.60);
+    }
+    .pain-text {
+      font-size: 17px;
+      color: #A0A0B0;
+      line-height: 1.75;
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    .pain-hit {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+    .pain-quote {
+      display: inline-block;
+      color: #ffffff;
+      font-weight: 600;
+      font-style: italic;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 6px;
+      padding: 1px 8px;
+      margin: 0 2px;
+    }
+    .pain-closer {
+      margin-top: 80px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms ease-out, transform 700ms ease-out;
+    }
+    .pain-closer.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pain-closer__text {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(26px, 6vw, 42px);
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .pain-closer__danger {
+      color: #ff5d5d;
+      filter: drop-shadow(0 0 12px rgba(255,93,93,0.50));
+    }
+    /* Phone notification bubble */
+    .pain-notif {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      background: rgba(255,93,93,0.06);
+      border: 1px solid rgba(255,93,93,0.20);
+      border-radius: 16px;
+      padding: 12px 18px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.97);
+      transition: opacity 500ms ease-out 900ms, transform 500ms ease-out 900ms;
+    }
+    .pain-closer.is-visible .pain-notif {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .pain-notif__dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #ff5d5d;
+      flex-shrink: 0;
+      animation: notif-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes notif-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,93,93,0); opacity: 1; }
+      50%       { box-shadow: 0 0 0 5px rgba(255,93,93,0.20); opacity: 0.75; }
+    }
+    .pain-notif__body {
+      text-align: left;
+    }
+    .pain-notif__from {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255,93,93,0.70);
+      font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .pain-notif__msg {
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+    @media (max-width: 767px) {
+      .pain-text  { font-size: 16px; }
+      .pain-quote { font-size: 0.95em; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#top" class="brand" aria-label="SkipOwls home">
+        <img src="../assets/logo.jpg" alt="SkipOwls" class="brand__logo" />
+        <span class="brand__name">SkipOwls</span>
+      </a>
+      <a href="#claim" class="btn btn--primary header__cta">Apply →</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div style="display:flex;justify-content:center;margin-bottom:20px;">
+          <span class="eyebrow hero__badge">For Outbound Agencies Dialing the US</span>
+        </div>
+
+        <h1 class="hero__headline">
+          <em>Your agents already know how to close.</em><br/>
+          Give them numbers that <span class="hero__answer-word">actually answer.</span>
+        </h1>
+        <style>
+          .hero__badge {
+            border-color: rgba(124, 44, 255, 0.40);
+            background: rgba(124, 44, 255, 0.10);
+            letter-spacing: 0.06em;
+            font-size: 11px;
+          }
+          .hero__badge::before {
+            background: #a970ff;
+            box-shadow: 0 0 0 4px rgba(124, 44, 255, 0.20);
+          }
+          .hero__answer-word {
+            background: linear-gradient(90deg, #a970ff 0%, #7c2bff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 18px rgba(124,43,255,0.45));
+          }
+        </style>
+
+        <!-- Wistia VSL embed -->
+        <div style="max-width:720px;width:100%;margin:28px auto;">
+          <script src="https://fast.wistia.com/player.js" async></script>
+          <script src="https://fast.wistia.com/embed/tjv0uhdnye.js" async type="module"></script>
+          <style>wistia-player[media-id='tjv0uhdnye']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/tjv0uhdnye/swatch');display:block;filter:blur(5px);padding-top:56.25%;}</style>
+          <wistia-player media-id="tjv0uhdnye" aspect="1.7777777777777777" style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow),0 0 60px 18px rgba(124,44,255,0.35);"></wistia-player>
+        </div>
+
+        <p class="hero__sub">
+          We give away 2,000 free records to every agency that qualifies. Book a 15-min call to get yours.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#claim" class="btn btn--primary btn--xl hero__cta" data-cta="hero">
+            Book a free call →
+          </a>
+          <a href="#catch" class="hero__secondary">What's the Catch?</a>
+        </div>
+
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <span class="hero__stat-num">92%+</span>
+            <span class="hero__stat-label">Connection rate guaranteed</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">3&cent;</span>
+            <span class="hero__stat-label">Per record at base</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">48h</span>
+            <span class="hero__stat-label">Delivery, not weeks</span>
+          </div>
+        </div>
+
+        <!-- ============ LOGO MARQUEE ============ -->
+        <div class="marquee-wrap">
+          <p class="marquee-wrap__label">Used by outbound agencies</p>
+          <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+              <!-- Set 1 -->
+              <div class="marquee__card"><img src="assets/DIY Real Estate.webp" alt="DIY Real Estate" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card"><img src="assets/Omnikom.png" alt="Omnikom" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card"><img src="assets/Interstate_White.webp" alt="Interstate" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card"><img src="assets/Carolina Ridge Roofing.jpg" alt="Carolina Ridge Roofing" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card"><img src="assets/Roofing Cano.webp" alt="Roofing Cano" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <!-- Set 2 — duplicate for seamless loop -->
+              <div class="marquee__card" aria-hidden="true"><img src="assets/DIY Real Estate.webp" alt="DIY Real Estate" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card" aria-hidden="true"><img src="assets/Omnikom.png" alt="Omnikom" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card" aria-hidden="true"><img src="assets/Interstate_White.webp" alt="Interstate" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card" aria-hidden="true"><img src="assets/Carolina Ridge Roofing.jpg" alt="Carolina Ridge Roofing" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+              <div class="marquee__card" aria-hidden="true"><img src="assets/Roofing Cano.webp" alt="Roofing Cano" style="height:24px;width:auto;object-fit:contain;display:block;" /></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Section separator ── -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0 16px;position:relative;z-index:2;">
+      <div style="width:1px;height:32px;background:linear-gradient(to bottom,transparent,rgba(124,43,255,0.35));"></div>
+      <div style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(124,43,255,0.40);background:rgba(124,43,255,0.08);box-shadow:0 0 0 5px rgba(124,43,255,0.06),0 0 18px rgba(124,43,255,0.18);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+        <img src="../assets/logo.jpg" alt="" style="width:26px;height:26px;object-fit:cover;border-radius:50%;opacity:0.85;" />
+      </div>
+      <div style="width:1px;height:24px;background:linear-gradient(to bottom,rgba(124,43,255,0.25),transparent);"></div>
+    </div>
+
+    <!-- ============ PAIN AMPLIFICATION ============ -->
+    <section id="pain-section">
+      <div class="pain-inner">
+
+        <!-- Pain section intro — redesigned for impact -->
+        <div class="pain-intro">
+          <p class="pain-intro__eyebrow">Every week. Without fail.</p>
+          <h2 class="pain-intro__headline">You've lived this<br/><em>week before.</em></h2>
+          <div class="pain-intro__days" aria-hidden="true">
+            <div class="pain-intro__day" data-day="mon"><span class="pid-label">MON</span><span class="pid-dot"></span></div>
+            <div class="pain-intro__day-line"></div>
+            <div class="pain-intro__day" data-day="tue"><span class="pid-label">TUE</span><span class="pid-dot"></span></div>
+            <div class="pain-intro__day-line"></div>
+            <div class="pain-intro__day" data-day="wed"><span class="pid-label">WED</span><span class="pid-dot pid-dot--warn"></span></div>
+            <div class="pain-intro__day-line pain-intro__day-line--warn"></div>
+            <div class="pain-intro__day" data-day="thu"><span class="pid-label">THU</span><span class="pid-dot pid-dot--danger"></span></div>
+            <div class="pain-intro__day-line pain-intro__day-line--danger"></div>
+            <div class="pain-intro__day" data-day="fri"><span class="pid-label">FRI</span><span class="pid-dot pid-dot--danger"></span></div>
+          </div>
+        </div>
+
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;700;800&display=swap');
+
+          .pain-intro {
+            text-align: center;
+            margin-bottom: 64px;
+          }
+          .pain-intro__eyebrow {
+            font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.28);
+            margin-bottom: 18px;
+          }
+          .pain-intro__headline {
+            font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+            font-size: clamp(36px, 8vw, 60px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            margin-bottom: 36px;
+          }
+          .pain-intro__headline em {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-style: italic;
+            font-weight: 400;
+            color: transparent;
+            background: linear-gradient(90deg, #a970ff, #7c2bff, #F6C25A);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 1.08em;
+          }
+          /* Day indicator row */
+          .pain-intro__days {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            max-width: 380px;
+            margin: 0 auto;
+          }
+          .pain-intro__day {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+          }
+          .pid-label {
+            font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.25);
+          }
+          .pid-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: 1.5px solid rgba(255,255,255,0.20);
+            transition: background 0.3s ease;
+          }
+          .pid-dot--warn {
+            background: rgba(246,194,90,0.30);
+            border-color: rgba(246,194,90,0.60);
+            box-shadow: 0 0 8px rgba(246,194,90,0.25);
+          }
+          .pid-dot--danger {
+            background: rgba(124,43,255,0.35);
+            border-color: rgba(124,43,255,0.70);
+            box-shadow: 0 0 10px rgba(124,43,255,0.40);
+          }
+          .pain-intro__day-line {
+            flex: 1;
+            height: 1.5px;
+            background: rgba(255,255,255,0.08);
+            min-width: 32px;
+            margin-bottom: -18px; /* align with dots row */
+            align-self: flex-end;
+            margin-bottom: 3px;
+          }
+          .pain-intro__day-line--warn {
+            background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(246,194,90,0.40));
+          }
+          .pain-intro__day-line--danger {
+            background: linear-gradient(90deg, rgba(246,194,90,0.40), rgba(124,43,255,0.50));
+          }
+        </style>
+
+        <div class="pain-timeline">
+          <div class="pain-track" aria-hidden="true"></div>
+
+          <div class="pain-block" data-pain data-day="monday">
+            <div class="pain-node">
+              <div class="pain-node__ring"><span class="pain-node__num">01</span></div>
+            </div>
+            <div class="pain-content">
+              <p class="pain-day">Monday</p>
+              <p class="pain-text">Fresh list. New week. You tell yourself this time the numbers will be different.</p>
+            </div>
+          </div>
+
+          <div class="pain-block" data-pain data-day="tuesday">
+            <div class="pain-node">
+              <div class="pain-node__ring"><span class="pain-node__num">02</span></div>
+            </div>
+            <div class="pain-content">
+              <p class="pain-day">Tuesday</p>
+              <p class="pain-text">Your floor manager walks over. Lowers his voice. <span class="pain-quote">"The list is bad again."</span> You already knew. You could hear it in the silence between dials.</p>
+            </div>
+          </div>
+
+          <div class="pain-block" data-pain data-day="wednesday">
+            <div class="pain-node">
+              <div class="pain-node__ring"><span class="pain-node__num">03</span></div>
+            </div>
+            <div class="pain-content">
+              <p class="pain-day">Wednesday</p>
+              <p class="pain-text">You refresh the dashboard. <span class="pain-hit">31% connection rate.</span> You close the tab.</p>
+            </div>
+          </div>
+
+          <div class="pain-block" data-pain data-day="thursday">
+            <div class="pain-node">
+              <div class="pain-node__ring"><span class="pain-node__num">04</span></div>
+            </div>
+            <div class="pain-content">
+              <p class="pain-day">Thursday</p>
+              <p class="pain-text">Your US client sends a message. Just three words. <span class="pain-quote">"How are numbers?"</span> You type four different replies. You delete all of them. You send a voice note instead because at least they cannot screenshot that.</p>
+            </div>
+          </div>
+
+          <div class="pain-block" data-pain data-day="friday">
+            <div class="pain-node">
+              <div class="pain-node__ring"><span class="pain-node__num">05</span></div>
+            </div>
+            <div class="pain-content">
+              <p class="pain-day">Friday</p>
+              <p class="pain-text">The weekly report goes out. You sit there for a moment before you hit send. You know what comes next.<br><br>Ten minutes later... <span class="pain-quote">"Can we hop on a quick call?"</span></p>
+            </div>
+          </div>
+
+        </div><!-- /.pain-timeline -->
+
+        <div class="pain-closer" data-pain-close>
+          <span class="pain-closer__text">You already know what <span class="pain-closer__danger">that call</span> is about.</span>
+          <div class="pain-notif">
+            <div class="pain-notif__dot"></div>
+            <div class="pain-notif__body">
+              <span class="pain-notif__from">US Client · just now</span>
+              <span class="pain-notif__msg">"We need to Discuss the results..."</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ BRIDGE ============ -->
+    <section id="bridge-section">
+
+      <!-- Part 1: Evidence card -->
+      <div class="bv2-card" id="bv2Card">
+        <span class="bv2-card-label">THE PROBLEM IS NOT:</span>
+        <div class="bv2-row">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">Your agents.</span>
+        </div>
+        <div class="bv2-row">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">Your script.</span>
+        </div>
+        <div class="bv2-row" style="margin-bottom:0">
+          <div class="bv2-x"><span>✕</span></div>
+          <span class="bv2-phrase">Your process.</span>
+        </div>
+      </div>
+
+      <!-- Part 2: Divider -->
+      <div class="bv2-divider-wrap">
+        <div class="bv2-divider" id="bv2Divider"></div>
+      </div>
+
+      <!-- Part 3: Verdict -->
+      <div class="bv2-verdict">
+        <p class="bv2-line1" id="bv2Line1">It&rsquo;s the data.</p>
+        <p class="bv2-line2" id="bv2Line2">It was always the data.</p>
+      </div>
+
+    </section>
+
+    <style>
+      #bridge-section {
+        padding: 80px 24px;
+        background: var(--bg);
+      }
+      .bv2-card {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #0D0D1A;
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 0 40px rgba(124, 58, 237, 0.08);
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 500ms ease-out, transform 500ms ease-out;
+      }
+      .bv2-card.is-visible { opacity: 1; transform: translateY(0); }
+      .bv2-card-label {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #666680;
+        margin-bottom: 28px;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+      .bv2-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+      .bv2-x {
+        width: 28px; height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+        background: #1A0A0A;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .bv2-x span {
+        color: #EF4444;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .bv2-phrase {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        position: relative;
+        display: inline-block;
+      }
+      /* Animated strikethrough via pseudo-element */
+      .bv2-phrase::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 2px;
+        width: 0;
+        background: rgba(239, 68, 68, 0.7);
+        border-radius: 1px;
+        transition: width 500ms cubic-bezier(.4, 0, .2, 1);
+      }
+      /* Stagger each line after card is visible */
+      .bv2-card.is-visible .bv2-row:nth-child(2) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 400ms;
+      }
+      .bv2-card.is-visible .bv2-row:nth-child(3) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 900ms;
+      }
+      .bv2-card.is-visible .bv2-row:nth-child(4) .bv2-phrase::after {
+        width: 100%;
+        transition-delay: 1400ms;
+      }
+      .bv2-divider-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 48px 0;
+      }
+      .bv2-divider {
+        width: 80px; height: 2px;
+        background: #7C3AED;
+        border-radius: 2px;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 400ms ease-out, box-shadow 600ms ease-in-out;
+      }
+      .bv2-divider.is-grown  { transform: scaleX(1); }
+      .bv2-divider.is-pulsed { box-shadow: 0 0 12px rgba(124, 58, 237, 0.8); }
+      .bv2-divider.is-done   { box-shadow: none; }
+      .bv2-verdict { text-align: center; }
+      .bv2-line1 {
+        font-size: 56px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin: 0;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 500ms ease-out, transform 500ms ease-out;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+      .bv2-line1.is-visible { opacity: 1; transform: translateY(0); }
+      .bv2-line2 {
+        font-size: 20px;
+        font-weight: 400;
+        color: #7C3AED;
+        margin: 12px 0 0 0;
+        opacity: 0;
+        transition: opacity 400ms ease-out;
+        font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+      .bv2-line2.is-visible { opacity: 1; }
+      @media (max-width: 768px) {
+        .bv2-card   { max-width: 100%; padding: 24px; }
+        .bv2-phrase { font-size: 18px; }
+        .bv2-line1  { font-size: 44px; }
+        .bv2-line2  { font-size: 18px; }
+      }
+    </style>
+
+    <script>
+      (function () {
+        const section  = document.getElementById('bridge-section');
+        const card     = document.getElementById('bv2Card');
+        const divider  = document.getElementById('bv2Divider');
+        const line1    = document.getElementById('bv2Line1');
+        const line2    = document.getElementById('bv2Line2');
+
+        const obs = new IntersectionObserver(function(entries) {
+          if (!entries[0].isIntersecting) return;
+          obs.disconnect();
+
+          // Step 1 — card in at t=0
+          card.classList.add('is-visible');
+
+          // Step 2 — divider grows at t=300ms
+          setTimeout(function() {
+            divider.classList.add('is-grown');
+          }, 300);
+
+          // Step 3 — divider pulse at t=700ms (after 400ms grow)
+          setTimeout(function() {
+            divider.classList.add('is-pulsed');
+          }, 700);
+
+          // Step 4 — pulse fades at t=1300ms
+          setTimeout(function() {
+            divider.classList.remove('is-pulsed');
+            divider.classList.add('is-done');
+          }, 1300);
+
+          // Step 5 — line1 at t=500ms
+          setTimeout(function() {
+            line1.classList.add('is-visible');
+          }, 500);
+
+          // Step 6 — line2 at t=1000ms (500ms after line1)
+          setTimeout(function() {
+            line2.classList.add('is-visible');
+          }, 1000);
+        }, { threshold: 0.30 });
+
+        obs.observe(section);
+      })();
+    </script>
+
+    <!-- ============ THE OFFER ============ -->
+    <section class="section section--reveal" id="offer-section">
+      <div class="container container--narrow">
+
+        <!-- Header -->
+        <div class="offer-header">
+          <p class="eyebrow eyebrow--center">Introducing SkipOwls</p>
+          <h2 class="offer-headline">Your agency isn't generic.<br/>Your data shouldn't be either.</h2>
+          <p class="offer-subline">Most providers send you a list and disappear. We get on a call first.</p>
+        </div>
+
+        <!-- Steps -->
+        <div class="offer-steps" style="display:none">
+
+          <div class="offer-step">
+            <div class="offer-step__header">
+              <span class="offer-step__tag">Step 1 — The Call</span>
+              <h3 class="offer-step__h">We hop on a 15-minute call</h3>
+            </div>
+            <p class="offer-step__body">We learn your verticals, your US clients, how your floor runs, and what a good week looks like for your team. No forms, no onboarding, no guessing.</p>
+            <div class="offer-step__connector" aria-hidden="true"></div>
+          </div>
+
+          <div class="offer-step">
+            <div class="offer-step__header">
+              <span class="offer-step__tag">Step 2 — The Build</span>
+              <h3 class="offer-step__h">We pull data built around you</h3>
+            </div>
+            <p class="offer-step__body">Your targets, your format, your campaign needs. Every record is live-verified before it ships. Back to you in 48 hours — often less. At 3¢ per record, not 30¢.</p>
+            <div class="offer-step__connector" aria-hidden="true"></div>
+          </div>
+
+          <div class="offer-step offer-step--last">
+            <div class="offer-step__header">
+              <span class="offer-step__tag offer-step__tag--gold">Step 3 — The Result</span>
+              <h3 class="offer-step__h">Your agents start getting through</h3>
+            </div>
+            <p class="offer-step__body">Upload to your dialer and go. Most clients hit 92%+ contact rate in the first week. If you drop below 90%, we make it right. No questions.</p>
+            <!-- Closing line -->
+            <p class="offer-closing">That's the whole model. One call to start. Data that fits. Results you can measure.</p>
+          </div>
+
+        </div>
+
+        <!-- VARIANT B: Conversation UI -->
+        <div id="offerChat">
+          <div class="chat-window">
+            <div class="chat-topbar">
+              <div class="chat-avatar"><img src="../assets/logo.jpg" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;"/></div>
+              <div class="chat-meta">
+                <span class="chat-name">SkipOwls</span>
+                <span class="chat-status"><span class="chat-dot"></span>Online now</span>
+              </div>
+            </div>
+            <div class="chat-body" id="offerChatBody">
+              <!-- Messages injected by JS -->
+            </div>
+          </div>
+          <p class="offer-closing" style="text-align:center;margin-top:32px;padding-bottom:0;">That's the whole model. One call to start. Data that fits. Results you can measure.</p>
+        </div>
+
+        <!-- VARIANT C: Bento grid -->
+        <div id="offerBento" style="display:none;">
+          <div class="bento-grid">
+
+            <!-- Big headline card -->
+            <div class="bento-card bento-card--headline">
+              <span class="bento-tag">The Model</span>
+              <p class="bento-big-text">One call.<br/>Custom data.<br/>Results.</p>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="bento-card bento-card--step">
+              <span class="bento-step-num">01</span>
+              <h3 class="bento-step-h">The Call</h3>
+              <p class="bento-step-p">15 minutes. We learn your verticals, your clients, your floor. No forms, no guessing.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="bento-card bento-card--step">
+              <span class="bento-step-num">02</span>
+              <h3 class="bento-step-h">The Build</h3>
+              <p class="bento-step-p">Data pulled for your exact targets. Live-verified. Back to you in 48 hours at 3¢/record.</p>
+            </div>
+
+            <!-- Stat card -->
+            <div class="bento-card bento-card--stat">
+              <span class="bento-stat-num">95%+</span>
+              <span class="bento-stat-label">avg. contact rate<br/>week one</span>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="bento-card bento-card--step bento-card--gold">
+              <span class="bento-step-num bento-step-num--gold">03</span>
+              <h3 class="bento-step-h">The Result</h3>
+              <p class="bento-step-p">Upload to your dialer. Start calling. Drop below 90% contact rate — we make it right. No questions.</p>
+            </div>
+
+            <!-- Guarantee card -->
+            <div class="bento-card bento-card--guarantee">
+              <span class="bento-guarantee-icon">✓</span>
+              <p class="bento-guarantee-text">90% contact rate<br/>guarantee</p>
+            </div>
+
+          </div>
+          <p class="offer-closing" style="text-align:center;margin-top:32px;padding-bottom:0;">That's the whole model. One call to start. Data that fits. Results you can measure.</p>
+        </div>
+
+        <!-- CTA -->
+        <div style="text-align:center;margin-top:48px;">
+          <a href="#claim" class="btn btn--primary btn--xl">Book the 15-minute call →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <style>
+      /* ── Bento variant ── */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 10px;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .bento-card {
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 18px;
+        padding: 22px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+        overflow: hidden;
+      }
+      .bento-card--headline {
+        grid-column: 1 / -1;
+        background: rgba(124,43,255,0.10);
+        border-color: rgba(124,43,255,0.25);
+        padding: 28px 24px;
+      }
+      .bento-tag {
+        font-size: 10px; font-weight: 700;
+        letter-spacing: 0.14em; text-transform: uppercase;
+        color: rgba(124,43,255,0.70);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-big-text {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-style: italic;
+        font-size: clamp(28px, 6vw, 38px);
+        color: #fff;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+      }
+      .bento-card--step { justify-content: space-between; }
+      .bento-step-num {
+        font-size: 11px; font-weight: 800;
+        letter-spacing: 0.10em;
+        color: rgba(124,43,255,0.50);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-step-num--gold { color: rgba(246,194,90,0.60); }
+      .bento-step-h {
+        font-size: 15px; font-weight: 700;
+        color: #fff; letter-spacing: -0.015em;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-step-p {
+        font-size: 12px; color: rgba(183,188,200,0.80);
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-card--gold {
+        border-color: rgba(246,194,90,0.20);
+        background: rgba(246,194,90,0.05);
+      }
+      .bento-card--stat {
+        background: rgba(124,43,255,0.08);
+        border-color: rgba(124,43,255,0.20);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 4px;
+      }
+      .bento-stat-num {
+        font-size: 32px; font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #a970ff, #7c2bff);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+        line-height: 1;
+      }
+      .bento-stat-label {
+        font-size: 11px; color: rgba(255,255,255,0.40);
+        line-height: 1.4;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-card--guarantee {
+        background: rgba(74,222,128,0.05);
+        border-color: rgba(74,222,128,0.18);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 6px;
+      }
+      .bento-guarantee-icon {
+        font-size: 20px; font-weight: 800;
+        color: #4ade80;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .bento-guarantee-text {
+        font-size: 12px; color: rgba(74,222,128,0.75);
+        line-height: 1.4; font-weight: 600;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      @media (max-width: 400px) {
+        .bento-grid { grid-template-columns: 1fr; }
+        .bento-card--headline { grid-column: 1; }
+      }
+
+      /* ── Chat variant ── */
+      .chat-window {
+        max-width: 480px;
+        margin: 0 auto;
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      }
+      .chat-topbar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.02);
+      }
+      .chat-avatar {
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(124,43,255,0.40);
+        overflow: hidden; flex-shrink: 0;
+        box-shadow: 0 0 0 3px rgba(124,43,255,0.10);
+      }
+      .chat-name {
+        display: block;
+        font-size: 14px; font-weight: 700;
+        color: #fff;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .chat-status {
+        display: flex; align-items: center; gap: 5px;
+        font-size: 11px; color: rgba(255,255,255,0.38);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .chat-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 6px rgba(74,222,128,0.6);
+      }
+      .chat-body {
+        padding: 20px 16px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-height: 260px;
+      }
+      /* Bubbles */
+      .chat-msg {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 400ms ease, transform 400ms ease;
+      }
+      .chat-msg.visible { opacity: 1; transform: translateY(0); }
+      .chat-msg--them { align-items: flex-start; }
+      .chat-msg--us   { align-items: flex-end; }
+      .chat-bubble {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 16px;
+        font-size: 13px;
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .chat-msg--them .chat-bubble {
+        background: rgba(124,43,255,0.14);
+        border: 1px solid rgba(124,43,255,0.22);
+        color: rgba(255,255,255,0.90);
+        border-bottom-left-radius: 4px;
+      }
+      .chat-msg--us .chat-bubble {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.10);
+        color: rgba(255,255,255,0.70);
+        border-bottom-right-radius: 4px;
+      }
+      .chat-label {
+        font-size: 10px; font-weight: 700;
+        letter-spacing: 0.10em; text-transform: uppercase;
+        color: rgba(124,43,255,0.60);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .chat-msg--us .chat-label { color: rgba(255,255,255,0.25); }
+      .chat-stat-row {
+        display: flex; gap: 8px; flex-wrap: wrap;
+        margin-top: 4px;
+      }
+      .chat-stat-pill {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: rgba(246,194,90,0.10);
+        border: 1px solid rgba(246,194,90,0.25);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px; font-weight: 700;
+        color: #F6C25A;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      /* Typing indicator */
+      .chat-typing {
+        display: flex; align-items: center; gap: 4px;
+        padding: 10px 14px;
+        background: rgba(124,43,255,0.10);
+        border: 1px solid rgba(124,43,255,0.18);
+        border-radius: 16px; border-bottom-left-radius: 4px;
+        width: fit-content;
+        opacity: 0;
+        transition: opacity 200ms ease;
+      }
+      .chat-typing.visible { opacity: 1; }
+      .chat-typing span {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: rgba(124,43,255,0.70);
+        animation: typing-bounce 1.2s ease-in-out infinite;
+      }
+      .chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+      .chat-typing span:nth-child(3) { animation-delay: 0.30s; }
+      @keyframes typing-bounce {
+        0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
+        30%            { transform: translateY(-4px); opacity: 1; }
+      }
+    </style>
+
+
+
+    <script>
+      (function () {
+        var timeline = document.getElementById('offer-section').querySelector('.offer-steps');
+        var chat     = document.getElementById('offerChat');
+        var panel = document.getElementById('unified-tweaks');
+        var desc = document.getElementById('ut-offer-desc');
+        var closeBtn = document.getElementById('ut-close');
+        var chatBody = document.getElementById('offerChatBody');
+        var chatPlayed = false;
+
+        var messages = [
+          { side: 'us',   label: 'You',        text: 'We need better contact rates. Our current list is dead.' },
+          { side: 'them', label: 'SkipOwls',   text: 'Let\'s hop on a 15-minute call. We want to learn your verticals, your US clients, how your floor runs — before we build anything.' },
+          { side: 'us',   label: 'You',        text: 'That\'s it? Just a call?' },
+          { side: 'them', label: 'SkipOwls',   text: 'That\'s it. We pull data built around your exact targets and campaign needs. Every record live-verified. Back to you in 48 hours at 3¢ per record.', stats: ['3¢ / record', '48h delivery'] },
+          { side: 'us',   label: 'You',        text: 'And if the contact rate is bad again?' },
+          { side: 'them', label: 'SkipOwls',   text: 'Most clients hit 95%+ in week one. If you drop below 90%, we make it right. No questions.' },
+        ];
+
+        function buildChat() {
+          if (chatPlayed) return;
+          chatPlayed = true;
+          chatBody.innerHTML = '';
+          messages.forEach(function (msg, i) {
+            setTimeout(function () {
+              // Remove typing indicator
+              var existing = chatBody.querySelector('.chat-typing');
+              if (existing) existing.remove();
+
+              var el = document.createElement('div');
+              el.className = 'chat-msg chat-msg--' + msg.side;
+              var labelEl = document.createElement('span');
+              labelEl.className = 'chat-label';
+              labelEl.textContent = msg.label;
+              var bubble = document.createElement('div');
+              bubble.className = 'chat-bubble';
+              bubble.textContent = msg.text;
+              el.appendChild(labelEl);
+              el.appendChild(bubble);
+              if (msg.stats) {
+                var row = document.createElement('div');
+                row.className = 'chat-stat-row';
+                msg.stats.forEach(function (s) {
+                  var pill = document.createElement('span');
+                  pill.className = 'chat-stat-pill';
+                  pill.textContent = s;
+                  row.appendChild(pill);
+                });
+                el.appendChild(row);
+              }
+              chatBody.appendChild(el);
+              requestAnimationFrame(function () { el.classList.add('visible'); });
+              chatBody.scrollTop = chatBody.scrollHeight;
+
+              // Add typing indicator if more messages coming
+              if (i < messages.length - 1) {
+                var t = document.createElement('div');
+                t.className = 'chat-typing chat-msg--them';
+                t.innerHTML = '<span></span><span></span><span></span>';
+                setTimeout(function () {
+                  chatBody.appendChild(t);
+                  requestAnimationFrame(function () { t.classList.add('visible'); });
+                  chatBody.scrollTop = chatBody.scrollHeight;
+                }, 200);
+              }
+            }, i * 1100);
+          });
+        }
+
+        function showVariant(v) {
+          var bento = document.getElementById('offerBento');
+          if (v === 'chat') {
+            timeline.style.display = 'none';
+            chat.style.display = '';
+            bento.style.display = 'none';
+            buildChat();
+            desc.textContent = 'Conversational — shows the process as a live chat exchange.';
+          } else if (v === 'bento') {
+            timeline.style.display = 'none';
+            chat.style.display = 'none';
+            bento.style.display = '';
+            desc.textContent = 'Bento grid — asymmetric cards with stats and steps.';
+          } else {
+            timeline.style.display = '';
+            chat.style.display = 'none';
+            bento.style.display = 'none';
+            desc.textContent = 'Vertical narrative with connected steps.';
+          }
+          document.querySelectorAll('.offer-tw-btn').forEach(function (btn) {
+            var active = btn.dataset.offer === v;
+            btn.style.background    = active ? 'rgba(124,43,255,0.20)' : 'rgba(255,255,255,0.04)';
+            btn.style.borderColor   = active ? 'rgba(124,43,255,0.50)' : 'rgba(255,255,255,0.10)';
+            btn.style.color         = active ? '#a970ff' : 'rgba(255,255,255,0.45)';
+          });
+          window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { offerVariant: v } }, '*');
+        }
+
+      }());
+    </script>
+
+    <style>
+      .offer-header {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+      .offer-headline {
+        font-size: clamp(24px, 4vw, 36px);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        color: #fff;
+        margin: 14px 0 16px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .offer-subline {
+        font-size: clamp(15px, 1.6vw, 17px);
+        color: rgba(183,188,200,0.85);
+        line-height: 1.6;
+        max-width: 52ch;
+        margin: 0 auto;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      /* Steps */
+      .offer-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .offer-step {
+        position: relative;
+        padding: 28px 28px 0 76px;
+      }
+      .offer-step::before {
+        content: '';
+        position: absolute;
+        left: 20px; top: 0; bottom: 0;
+        width: 1.5px;
+        background: linear-gradient(180deg, rgba(124,43,255,0.40), rgba(124,43,255,0.15));
+      }
+      .offer-step--last::before {
+        bottom: auto;
+        height: 40px;
+      }
+      /* Step number circle */
+      .offer-step::after {
+        content: '';
+        position: absolute;
+        left: 8px; top: 28px;
+        width: 26px; height: 26px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(124,43,255,0.50);
+        background: rgba(124,43,255,0.12);
+        box-shadow: 0 0 0 4px rgba(124,43,255,0.07), 0 0 14px rgba(124,43,255,0.20);
+      }
+      .offer-step--last::after {
+        border-color: rgba(246,194,90,0.60);
+        background: rgba(246,194,90,0.10);
+        box-shadow: 0 0 0 4px rgba(246,194,90,0.07), 0 0 14px rgba(246,194,90,0.20);
+      }
+      .offer-step__header { margin-bottom: 10px; }
+      .offer-step__tag {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(124,43,255,0.80);
+        display: block;
+        margin-bottom: 5px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .offer-step__tag--gold { color: rgba(246,194,90,0.85); }
+      .offer-step__h {
+        font-size: clamp(17px, 2.2vw, 20px);
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .offer-step__body {
+        font-size: 14px;
+        color: rgba(183,188,200,0.85);
+        line-height: 1.7;
+        padding-bottom: 36px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .offer-closing {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-style: italic;
+        font-size: clamp(16px, 2.2vw, 19px);
+        color: rgba(255,255,255,0.60);
+        line-height: 1.55;
+        margin-top: 4px;
+        padding-bottom: 8px;
+      }
+    </style>
+
+
+    <!-- ============ MECHANISM ============ -->
+    <section id="mechanism-section">
+      <div class="mech-inner">
+
+        <p class="mech-eyebrow">03 / The Mechanism</p>
+        <h2 class="mech-headline">Why Teams Choose SkipOwls</h2>
+        <p class="mech-sub">Your outreach is only as good as your data.</p>
+
+        <!-- Card 1 -->
+        <div class="mech-card" data-mech>
+          <p class="mech-card__label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/><circle cx="11" cy="9" r="2.5"/><path d="M6.5 17.5a5 5 0 0 1 9 0"/></svg>
+            Owner Tracing
+          </p>
+          <div class="mech-split">
+            <div class="mech-col mech-col--bad">
+              <span class="mech-icon">✕</span>
+              <p class="mech-col__head">Others</p>
+              <p class="mech-col__body">Pay per owner. 2nd and 3rd owners? Extra charge. If they trace them at all.</p>
+            </div>
+            <div class="mech-col mech-col--good">
+              <span class="mech-icon">✓</span>
+              <p class="mech-col__head">SkipOwls</p>
+              <p class="mech-col__body">Pay for the 1st owner. We trace the 2nd, 3rd, and 4th. Free, every time.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="mech-card" data-mech>
+          <p class="mech-card__label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Data Freshness</p>
+          <div class="mech-split">
+            <div class="mech-col mech-col--bad">
+              <span class="mech-icon">✕</span>
+              <p class="mech-col__head">Others</p>
+              <p class="mech-col__body">Recycled lists. Sold to dozens of agencies before yours. Stale by the time it reaches you.</p>
+            </div>
+            <div class="mech-col mech-col--good">
+              <span class="mech-icon">✓</span>
+              <p class="mech-col__head">SkipOwls</p>
+              <p class="mech-col__body">Live-verified. Regularly updated. Every record is fresh before it ships.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="mech-card" data-mech>
+          <p class="mech-card__label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Payment Model</p>
+          <div class="mech-split">
+            <div class="mech-col mech-col--bad">
+              <span class="mech-icon">✕</span>
+              <p class="mech-col__head">Others</p>
+              <p class="mech-col__body">Pay upfront. Empty records, missing data, undelivered traces. Your problem.</p>
+            </div>
+            <div class="mech-col mech-col--good">
+              <span class="mech-icon">✓</span>
+              <p class="mech-col__head">SkipOwls</p>
+              <p class="mech-col__body">You pay only for delivered results. No record delivered, no charge. Simple.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <style>
+      #mechanism-section {
+        padding: 100px 0;
+        background: var(--bg-elev);
+        border-top: 1px solid var(--border);
+      }
+      .mech-inner {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .mech-eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.30);
+        margin-bottom: 14px;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .mech-headline {
+        font-size: clamp(26px, 6vw, 36px);
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        margin-bottom: 12px;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .mech-sub {
+        font-size: 16px;
+        color: rgba(255,255,255,0.50);
+        margin-bottom: 48px;
+        line-height: 1.5;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .mech-card {
+        border: 1px solid var(--border-strong);
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        opacity: 0.12;
+        filter: grayscale(0.5);
+        transition: opacity 600ms ease-out, filter 600ms ease-out;
+      }
+      .mech-card.is-visible { opacity: 1; filter: grayscale(0); }
+      .mech-card__label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.35);
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .mech-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+      .mech-col {
+        padding: 18px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .mech-col--bad  { background: rgba(239,68,68,0.04); border-right: 1px solid var(--border); }
+      .mech-col--good { background: rgba(124,44,255,0.07); }
+      .mech-icon { font-size: 13px; font-weight: 700; line-height: 1; }
+      .mech-col--bad  .mech-icon { color: rgba(239,68,68,0.7); }
+      .mech-col--good .mech-icon { color: #a970ff; }
+      .mech-col__head {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .mech-col--bad  .mech-col__head { color: rgba(255,255,255,0.35); }
+      .mech-col--good .mech-col__head { color: #a970ff; }
+      .mech-col__body {
+        font-size: 13px;
+        line-height: 1.55;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .mech-col--bad  .mech-col__body { color: rgba(255,255,255,0.35); }
+      .mech-col--good .mech-col__body { color: rgba(255,255,255,0.85); }
+    </style>
+
+    <script>
+      (function () {
+        var cards = document.querySelectorAll('[data-mech]');
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -10px 0px' });
+        cards.forEach(function (c) { obs.observe(c); });
+      }());
+    </script>
+
+    <!-- ============ CATCH ============ -->
+    <section id="catch-section">
+      <div class="catch-inner">
+        <div class="catch-header">
+          <div class="catch-title-wrap">
+            <p class="catch-label">What's The Catch?</p>
+            <p class="catch-sub">Something's hidden here. Scratch to find out.</p>
+          </div>
+          <span class="catch-q" aria-hidden="true">?</span>
+        </div>
+
+        <div class="scratch-wrap" id="scratchWrap">
+          <!-- Content revealed underneath -->
+          <div class="scratch-reveal" id="scratchReveal">
+            <p class="catch-headline">We only win if you do.</p>
+            <p class="catch-body">You get 2,000 records. You call them.<br>If they connect, you order more. If they don't, you walk.</p>
+          </div>
+          <!-- Scratch surface -->
+          <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+          <!-- Hint -->
+          <div class="scratch-hint" id="scratchHint">
+            <span class="scratch-finger">👆</span>
+            <span class="scratch-hint-text">Scratch to reveal</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <style>
+      #catch-section {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+      }
+      .catch-inner {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      /* Header row above the card */
+      .catch-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .catch-title-wrap {
+        flex: 1;
+        min-width: 0;
+      }
+      .catch-label {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #ffffff;
+        line-height: 1.15;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .catch-sub {
+        font-size: 13px;
+        color: rgba(255,255,255,0.38);
+        margin-top: 4px;
+        line-height: 1.45;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      /* Pulsing ? mark */
+      .catch-q {
+        flex-shrink: 0;
+        font-size: 30px;
+        font-weight: 900;
+        color: #a970ff;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        line-height: 1;
+        animation: q-pulse 2s ease-in-out infinite;
+      }
+      @keyframes q-pulse {
+        0%, 100% { opacity: 0.45; transform: scale(1);    }
+        50%       { opacity: 1;   transform: scale(1.2); }
+      }
+
+      /* Card wrapper */
+      .scratch-wrap {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #0d0d12;
+        border: 1px solid var(--border-strong);
+        min-height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: crosshair;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      /* Revealed content */
+      .scratch-reveal {
+        padding: 36px 28px;
+        text-align: center;
+        pointer-events: none;
+      }
+      .catch-headline {
+        font-size: clamp(22px, 5.5vw, 30px);
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.025em;
+        line-height: 1.15;
+        margin-bottom: 14px;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .catch-body {
+        font-size: 15px;
+        line-height: 1.65;
+        color: rgba(255,255,255,0.55);
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+
+      /* Canvas sits on top */
+      .scratch-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        touch-action: none;
+      }
+
+      /* Card border pulse */
+      @keyframes scratch-border-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(124,44,255,0); border-color: rgba(255,255,255,0.12); }
+        50%       { box-shadow: 0 0 0 5px rgba(124,44,255,0.18); border-color: rgba(124,44,255,0.45); }
+      }
+      .scratch-wrap { animation: scratch-border-pulse 2.4s ease-in-out infinite; }
+      .scratch-wrap.is-done { animation: none; }
+
+      /* Hint badge */
+      .scratch-hint {
+        position: absolute;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: rgba(255,255,255,0.55);
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 999px;
+        padding: 5px 14px;
+        pointer-events: none;
+        transition: opacity 400ms ease;
+        white-space: nowrap;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .scratch-hint.is-hidden { opacity: 0; }
+
+      /* Finger emoji — scratches back and forth */
+      .scratch-finger {
+        display: inline-block;
+        animation: finger-scratch 1.1s ease-in-out infinite;
+        transform-origin: bottom center;
+      }
+      @keyframes finger-scratch {
+        0%   { transform: translateX(-6px) rotate(-8deg); }
+        45%  { transform: translateX( 6px) rotate( 8deg); }
+        55%  { transform: translateX( 6px) rotate( 8deg); }
+        100% { transform: translateX(-6px) rotate(-8deg); }
+      }
+
+      /* "Scratch" text pulses opacity */
+      @keyframes hint-pulse {
+        0%, 100% { opacity: 0.55; }
+        50%       { opacity: 1;    }
+      }
+      .scratch-hint-text { animation: hint-pulse 1.1s ease-in-out infinite; }
+    </style>
+
+    <script>
+      (function () {
+        var wrap   = document.getElementById('scratchWrap');
+        var canvas = document.getElementById('scratchCanvas');
+        var hint   = document.getElementById('scratchHint');
+        if (!wrap || !canvas) return;
+
+        var ctx;
+        var isDrawing = false;
+        var scratched = false;
+        var BRUSH = 44; // px radius
+
+        function initCanvas() {
+          var rect = wrap.getBoundingClientRect();
+          // Use devicePixelRatio for crisp rendering
+          var dpr = window.devicePixelRatio || 1;
+          canvas.width  = rect.width  * dpr;
+          canvas.height = rect.height * dpr;
+          canvas.style.width  = rect.width  + 'px';
+          canvas.style.height = rect.height + 'px';
+          ctx = canvas.getContext('2d');
+          ctx.scale(dpr, dpr);
+
+          var w = rect.width;
+          var h = rect.height;
+
+          // 1. Solid opaque base — this is what hides the content beneath
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.fillStyle = '#16112b';
+          ctx.fillRect(0, 0, w, h);
+
+          // 2. Grain via small random dots drawn ON TOP (not putImageData)
+          ctx.globalCompositeOperation = 'source-over';
+          for (var g = 0; g < w * h * 0.08; g++) {
+            var gx = Math.random() * w;
+            var gy = Math.random() * h;
+            var bright = Math.random() > 0.5 ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.12)';
+            ctx.fillStyle = bright;
+            ctx.fillRect(gx, gy, 1, 1);
+          }
+
+          // 3. Subtle purple shimmer in the middle
+          var grad = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, w * 0.45);
+          grad.addColorStop(0, 'rgba(124,44,255,0.12)');
+          grad.addColorStop(1, 'rgba(124,44,255,0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, w, h);
+
+          // 4. Label text
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.fillStyle = 'rgba(255,255,255,0.22)';
+          ctx.font = '700 11px ui-sans-serif, system-ui, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('SCRATCH HERE', w / 2, h / 2 - 12);
+          ctx.font = '22px serif';
+          ctx.fillText('🦉', w / 2, h / 2 + 16);
+        }
+
+        function getPos(e) {
+          var rect = canvas.getBoundingClientRect();
+          var src  = e.touches ? e.touches[0] : e;
+          // coords in CSS pixels (ctx was scaled by dpr, so just use CSS px directly)
+          return {
+            x: (src.clientX - rect.left),
+            y: (src.clientY - rect.top)
+          };
+        }
+
+        function scratch(x, y) {
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, BRUSH, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function checkComplete() {
+          var dpr  = window.devicePixelRatio || 1;
+          var sw   = Math.floor(canvas.width  / dpr);
+          var sh   = Math.floor(canvas.height / dpr);
+          var data = ctx.getImageData(0, 0, sw, sh).data;
+          var total = sw * sh;
+          var clear  = 0;
+          for (var i = 3; i < data.length; i += 4) {
+            if (data[i] === 0) clear++;
+          }
+          if (clear / total > 0.55) {
+            canvas.style.transition = 'opacity 500ms ease';
+            canvas.style.opacity = '0';
+            setTimeout(function () { canvas.style.display = 'none'; }, 500);
+            scratched = true;
+          }
+        }
+
+        canvas.addEventListener('mousedown', function (e) {
+          if (scratched) return;
+          isDrawing = true;
+          hint.classList.add('is-hidden');
+          wrap.classList.add('is-done'); // stop border pulse
+          var p = getPos(e); scratch(p.x, p.y);
+        });
+        canvas.addEventListener('mousemove', function (e) {
+          if (!isDrawing || scratched) return;
+          var p = getPos(e); scratch(p.x, p.y); checkComplete();
+        });
+        window.addEventListener('mouseup', function () { isDrawing = false; });
+
+        canvas.addEventListener('touchstart', function (e) {
+          if (scratched) return;
+          e.preventDefault();
+          isDrawing = true;
+          hint.classList.add('is-hidden');
+          wrap.classList.add('is-done'); // stop border pulse
+          var p = getPos(e); scratch(p.x, p.y);
+        }, { passive: false });
+        canvas.addEventListener('touchmove', function (e) {
+          if (!isDrawing || scratched) return;
+          e.preventDefault();
+          var p = getPos(e); scratch(p.x, p.y); checkComplete();
+        }, { passive: false });
+        window.addEventListener('touchend', function () { isDrawing = false; });
+
+        // Init on load + re-init on resize
+        initCanvas();
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(initCanvas, 150);
+        });
+      }());
+    </script>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <h2 class="section__h section__h--center">Three steps. Zero friction.</h2>
+
+        <!-- VARIANT A: Timeline (vertical, connected) -->
+        <ol class="hiw-timeline" id="hiwTimeline">
+          <li class="hiw-tl-item">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring"><span class="hiw-tl-num">1</span></div>
+              <div class="hiw-tl-connector"></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag">You send</span>
+              <h3 class="hiw-tl-h">Send your address list</h3>
+              <p class="hiw-tl-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+            </div>
+          </li>
+          <li class="hiw-tl-item">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring hiw-tl-ring--mid"><span class="hiw-tl-num">2</span></div>
+              <div class="hiw-tl-connector"></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag hiw-tl-tag--mid">We work</span>
+              <h3 class="hiw-tl-h">We enrich it in 48 hours</h3>
+              <p class="hiw-tl-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <div class="hiw-tl-badge">⚡ Usually same-day</div>
+            </div>
+          </li>
+          <li class="hiw-tl-item hiw-tl-item--last">
+            <div class="hiw-tl-node">
+              <div class="hiw-tl-ring hiw-tl-ring--end"><span class="hiw-tl-num">3</span></div>
+            </div>
+            <div class="hiw-tl-body">
+              <span class="hiw-tl-tag hiw-tl-tag--end">You call</span>
+              <h3 class="hiw-tl-h">Upload to your dialer</h3>
+              <p class="hiw-tl-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- VARIANT B: Swipeable cards -->
+        <div class="hiw-swipe" id="hiwSwipe" style="display:none">
+          <div class="hiw-swipe__track">
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">01</div>
+              <div class="hiw-sc-icon">📋</div>
+              <h3 class="hiw-sc-h">Send your address list</h3>
+              <p class="hiw-sc-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot hiw-sc-dot--on"></span><span class="hiw-sc-dot"></span><span class="hiw-sc-dot"></span></div>
+            </div>
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">02</div>
+              <div class="hiw-sc-icon">⚡</div>
+              <h3 class="hiw-sc-h">We enrich it in 48 hours</h3>
+              <p class="hiw-sc-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot"></span><span class="hiw-sc-dot hiw-sc-dot--on"></span><span class="hiw-sc-dot"></span></div>
+            </div>
+            <div class="hiw-swipe__card">
+              <div class="hiw-sc-num">03</div>
+              <div class="hiw-sc-icon">📞</div>
+              <h3 class="hiw-sc-h">Upload to your dialer</h3>
+              <p class="hiw-sc-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+              <div class="hiw-sc-dot-row"><span class="hiw-sc-dot"></span><span class="hiw-sc-dot"></span><span class="hiw-sc-dot hiw-sc-dot--on"></span></div>
+            </div>
+          </div>
+          <p class="hiw-swipe__hint">Swipe to continue →</p>
+        </div>
+
+        <!-- VARIANT C: Bold numbers -->
+        <div class="hiw-bold" id="hiwBold" style="display:none">
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">1</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">Send your address list</h3>
+              <p class="hiw-bold-p">CSV, Excel, whatever you have. Property addresses in any US state.</p>
+            </div>
+          </div>
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">2</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">We enrich it in 48 hours</h3>
+              <p class="hiw-bold-p">Verified owner names, phone numbers, and emails appended to every record.</p>
+              <span class="hiw-bold-pill">⚡ Usually same-day</span>
+            </div>
+          </div>
+          <div class="hiw-bold-step">
+            <div class="hiw-bold-bg">3</div>
+            <div class="hiw-bold-content">
+              <h3 class="hiw-bold-h">Upload to your dialer</h3>
+              <p class="hiw-bold-p">Mojo, Batch Dialer, CallTools, whatever you run. Start calling the same day.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <style>
+      /* ── Variant A: Timeline ── */
+      .hiw-timeline {
+        list-style: none;
+        margin-top: 48px;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0;
+      }
+      .hiw-tl-item {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 0 20px;
+        margin-bottom: 0;
+      }
+      .hiw-tl-item--last .hiw-tl-body { padding-bottom: 0; }
+      .hiw-tl-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hiw-tl-ring {
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(124,43,255,0.5);
+        background: rgba(124,43,255,0.10);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 0 5px rgba(124,43,255,0.07), 0 0 20px rgba(124,43,255,0.20);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .hiw-tl-ring--mid {
+        border-color: rgba(169,112,255,0.6);
+        background: rgba(169,112,255,0.12);
+        box-shadow: 0 0 0 5px rgba(169,112,255,0.08), 0 0 24px rgba(169,112,255,0.25);
+      }
+      .hiw-tl-ring--end {
+        border-color: rgba(246,194,90,0.6);
+        background: rgba(246,194,90,0.10);
+        box-shadow: 0 0 0 5px rgba(246,194,90,0.08), 0 0 20px rgba(246,194,90,0.20);
+      }
+      .hiw-tl-num {
+        font-size: 16px; font-weight: 800;
+        color: #a970ff;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-ring--end .hiw-tl-num { color: #F6C25A; }
+      .hiw-tl-connector {
+        flex: 1;
+        width: 1.5px;
+        background: linear-gradient(180deg, rgba(124,43,255,0.35), rgba(169,112,255,0.15));
+        min-height: 32px;
+        margin: 4px 0;
+      }
+      .hiw-tl-body {
+        padding-bottom: 40px;
+        padding-top: 8px;
+      }
+      .hiw-tl-tag {
+        font-size: 10px; font-weight: 700;
+        letter-spacing: 0.12em; text-transform: uppercase;
+        color: rgba(169,112,255,0.7);
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+        display: block; margin-bottom: 6px;
+      }
+      .hiw-tl-tag--mid { color: rgba(169,112,255,0.9); }
+      .hiw-tl-tag--end { color: rgba(246,194,90,0.8); }
+      .hiw-tl-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        margin-bottom: 6px; line-height: 1.25;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-p {
+        font-size: 14px; color: rgba(183,188,200,0.85);
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-tl-badge {
+        display: inline-flex; align-items: center; gap: 5px;
+        margin-top: 10px;
+        background: rgba(169,112,255,0.08);
+        border: 1px solid rgba(169,112,255,0.22);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 12px; font-weight: 600;
+        color: #a970ff;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+
+      /* ── Variant B: Swipeable Cards ── */
+      .hiw-swipe { margin-top: 48px; }
+      .hiw-swipe__track {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 4px 4px 16px;
+      }
+      .hiw-swipe__track::-webkit-scrollbar { display: none; }
+      .hiw-swipe__card {
+        scroll-snap-align: center;
+        flex: 0 0 min(300px, 80vw);
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 20px;
+        padding: 28px 24px 24px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hiw-sc-num {
+        font-size: 80px; font-weight: 800;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        position: absolute; top: -8px; right: 16px;
+        background: linear-gradient(180deg, rgba(124,43,255,0.18), rgba(124,43,255,0));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        pointer-events: none;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-icon { font-size: 28px; }
+      .hiw-sc-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-p {
+        font-size: 13px; color: rgba(183,188,200,0.85);
+        line-height: 1.6; flex: 1;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-sc-dot-row {
+        display: flex; gap: 6px; margin-top: 8px;
+      }
+      .hiw-sc-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: rgba(255,255,255,0.12);
+      }
+      .hiw-sc-dot--on {
+        background: #7c2bff;
+        box-shadow: 0 0 8px rgba(124,43,255,0.6);
+        width: 18px; border-radius: 3px;
+      }
+      .hiw-swipe__hint {
+        text-align: center;
+        font-size: 12px; color: rgba(255,255,255,0.28);
+        margin-top: 8px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+
+      /* ── Variant C: Bold Numbers ── */
+      .hiw-bold {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        max-width: 580px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hiw-bold-step {
+        position: relative;
+        background: #0c0e18;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 16px;
+        padding: 28px 28px 28px 80px;
+        overflow: hidden;
+        transition: border-color 0.2s ease;
+      }
+      .hiw-bold-step:hover { border-color: rgba(124,43,255,0.35); }
+      .hiw-bold-bg {
+        position: absolute;
+        left: -8px; top: 50%;
+        transform: translateY(-50%);
+        font-size: 100px; font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.05em;
+        background: linear-gradient(135deg, rgba(124,43,255,0.22), rgba(124,43,255,0.04));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        pointer-events: none;
+        user-select: none;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-content { position: relative; z-index: 1; }
+      .hiw-bold-h {
+        font-size: 18px; font-weight: 700;
+        color: #fff; letter-spacing: -0.02em;
+        margin-bottom: 6px;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-p {
+        font-size: 14px; color: rgba(183,188,200,0.85);
+        line-height: 1.6;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+      .hiw-bold-pill {
+        display: inline-flex; align-items: center; gap: 5px;
+        margin-top: 10px;
+        background: rgba(169,112,255,0.08);
+        border: 1px solid rgba(169,112,255,0.22);
+        border-radius: 999px;
+        padding: 4px 12px;
+        font-size: 12px; font-weight: 600;
+        color: #a970ff;
+        font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      }
+    </style>
+
+
+
+    <script>
+      (function () {
+        var variants = {
+          timeline: { el: 'hiwTimeline', desc: 'Vertical narrative timeline — great storytelling flow on mobile.' },
+          swipe:    { el: 'hiwSwipe',    desc: 'Swipeable cards — one step at a time, scroll-snap on mobile.' },
+          bold:     { el: 'hiwBold',     desc: 'Bold stacked numbers — dramatic, minimal, high contrast.' },
+        };
+        var panel = document.getElementById('unified-tweaks');
+        var desc = document.getElementById('ut-hiw-desc');
+        var closeBtn = document.getElementById('ut-close');
+        var current = 'timeline';
+
+        function show(variant) {
+          Object.keys(variants).forEach(function(k) {
+            document.getElementById(variants[k].el).style.display = (k === variant) ? '' : 'none';
+          });
+          document.querySelectorAll('.tw-seg-btn').forEach(function(btn) {
+            btn.classList.toggle('is-active', btn.dataset.variant === variant);
+          });
+          desc.textContent = variants[variant].desc;
+          current = variant;
+          window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { hiwVariant: variant } }, '*');
+        }
+
+        document.querySelectorAll('.tw-seg-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() { show(btn.dataset.variant); });
+        });
+
+      }());
+    </script>
+
+    <!-- ============ SOCIAL PROOF ============ -->
+    <!-- ============ CLAIM / FORM ============ -->
+    <section class="section section--cta" id="claim">
+      <div class="container container--narrow">
+        <h2 class="section__h section__h--center">
+          Run 2,000 records free.<br/>
+          <span class="accent" style="font-family: &quot;Instrument Serif&quot;; font-weight: 400; font-size: 60px">See the numbers yourself.</span>
+        </h2>
+        <p class="section__lead section__lead--center">
+          No credit card. No subscription. 48-hour delivery. If our connection rate doesn&rsquo;t beat your current source, walk away. You&rsquo;ve lost nothing.
+        </p>
+
+        <form class="form" id="claimForm" novalidate>
+          <div class="form__row">
+            <label class="form__label" for="name">Full name</label>
+            <input class="form__input" type="text" id="name" name="name" required />
+          </div>
+          <div class="form__row">
+            <label class="form__label" for="email">Work email</label>
+            <input class="form__input" type="email" id="email" name="email" required />
+          </div>
+          <div class="form__row">
+            <label class="form__label" for="agency">Agency name</label>
+            <input class="form__input" type="text" id="agency" name="agency" required />
+          </div>
+          <div class="form__row">
+            <label class="form__label" for="vertical">Vertical</label>
+            <select class="form__input" id="vertical" name="vertical" required>
+              <option value="">Choose one</option>
+              <option value="solar">Solar</option>
+              <option value="real-estate">Real Estate (wholesalers / fix-and-flip)</option>
+              <option value="roofing">Roofing</option>
+              <option value="multi">Multi-vertical BPO</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label class="form__label" for="volume">Estimated monthly volume</label>
+            <select class="form__input" id="volume" name="volume" required>
+              <option value="">Choose one</option>
+              <option value="lt10k">Under 10,000 records</option>
+              <option value="10k-50k">10,000 &ndash; 50,000</option>
+              <option value="50k-200k">50,000 &ndash; 200,000</option>
+              <option value="gt200k">200,000+</option>
+            </select>
+          </div>
+
+          <button class="btn btn--primary btn--xl form__submit" type="submit" data-cta="form">
+            Claim My 2,000 Free Records →
+          </button>
+          <p class="form__legal">
+            We&rsquo;ll email you within 24 hours to schedule a 15-minute call and kick off your free trial.
+          </p>
+        </form>
+
+        <div class="form-success" id="formSuccess" hidden>
+          <h3 class="form-success__h">You&rsquo;re in. Check your email.</h3>
+          <p>We&rsquo;ll be in touch within 24 hours to schedule your 15-minute discovery call and start your 2,000-record free trial.</p>
+          <p>Want to skip the wait?</p>
+          <a class="btn btn--primary btn--xl" id="bookNow" href="#" target="_blank" rel="noopener">Book a call now →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section class="section section--dark" id="pricing">
+      <div class="container container--narrow">
+        <h2 class="section__h section__h--center">Volume pricing. No contracts.</h2>
+        <p class="section__lead section__lead--center">
+          Compare to the 10&ndash;30¢ per record US providers charge. Pay only for what you run.
+        </p>
+
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Volume per month</th>
+              <th>Price per record</th>
+              <th>Effective cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Free trial</td>
+              <td><strong class="accent">$0</strong></td>
+              <td>2,000 records, no credit card</td>
+            </tr>
+            <tr>
+              <td>Up to 10,000</td>
+              <td>3¢</td>
+              <td>$300 / 10K records</td>
+            </tr>
+            <tr>
+              <td>10,000 &ndash; 50,000</td>
+              <td>2.5¢</td>
+              <td>$1,250 / 50K records</td>
+            </tr>
+            <tr>
+              <td>50,000 &ndash; 200,000</td>
+              <td>2¢</td>
+              <td>$4,000 / 200K records</td>
+            </tr>
+            <tr>
+              <td>200,000+</td>
+              <td>Custom</td>
+              <td>Talk to us</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="pricing-table__note">
+          For reference: at 10¢ from a US provider, 200K records would cost <s>$20,000</s>. With SkipOwls, $4,000.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section section--dark" id="faq">
+      <div class="container container--narrow">
+        <div class="faq-icon-wrap">
+          <div class="faq-icon-badge" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <circle cx="12" cy="17" r="0.5" fill="currentColor"/>
+            </svg>
+          </div>
+        </div>
+        <h2 class="section__h section__h--center">Honest answers to the questions you&rsquo;re already thinking</h2>
+
+        <div class="faq">
+          <details class="faq__item">
+            <summary class="faq__q">3¢ is suspicious. The data must be bad, right?</summary>
+            <div class="faq__a">
+              <p>Reasonable instinct. The 2,000-record free trial exists exactly so you don&rsquo;t have to take our word for it. Run it on a live campaign next to your current source. If our contact rate doesn&rsquo;t beat what you&rsquo;re using, walk away. You haven&rsquo;t paid anything.</p>
+              <p>The pricing works because we&rsquo;re built lean for volume agencies, not US wholesalers buying 50 records at a time.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">I already have a data provider. Switching is risky.</summary>
+            <div class="faq__a">
+              <p>Don&rsquo;t switch. Run us in parallel for one week. Same campaign, half the lists from your current source, half from us. Compare contact rates side by side at the end of the week. If we don&rsquo;t win, keep your provider.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">What happens if my contact rate ends up below 90%?</summary>
+            <div class="faq__a">
+              <p>We review the campaign with you and make it right, whether that&rsquo;s re-running the records, crediting the order, or refining the input list. The guarantee is the entire reason this works.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section id="final-cta">
+      <div class="fcta-inner">
+
+        <p class="fcta-offer">2,000 records. Free. No credit card. Delivered in 48 hours.</p>
+
+        <div class="fcta-scarcity">
+          <span class="fcta-slots">4 slots left</span>
+          <p class="fcta-limit">We open 10 discovery calls per month for Egyptian agencies. 4 are still available.</p>
+        </div>
+
+        <a class="btn btn--primary btn--xl" href="#claim">Claim My Free Records →</a>
+
+      </div>
+    </section>
+
+    <style>
+      #final-cta {
+        padding: 80px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      .fcta-inner {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+      }
+      .fcta-offer {
+        font-size: clamp(18px, 5vw, 24px);
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      /* Scarcity block */
+      .fcta-scarcity {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .fcta-slots {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #a970ff;
+        background: rgba(124,44,255,0.12);
+        border: 1px solid rgba(124,44,255,0.30);
+        border-radius: 999px;
+        padding: 5px 14px;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        animation: slots-pulse 2s ease-in-out infinite;
+      }
+      .fcta-slots::before {
+        content: '';
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a970ff;
+        display: inline-block;
+        animation: dot-blink 1.2s ease-in-out infinite;
+      }
+      @keyframes slots-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(124,44,255,0); }
+        50%       { box-shadow: 0 0 0 6px rgba(124,44,255,0.12); }
+      }
+      @keyframes dot-blink {
+        0%, 100% { opacity: 1; }
+        50%       { opacity: 0.2; }
+      }
+      .fcta-limit {
+        font-size: 14px;
+        color: rgba(255,255,255,0.40);
+        line-height: 1.5;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+    </style>
+
+  
+  <!-- ── Unified Tweaks Panel ── -->
+  <style>
+    #unified-tweaks {
+      position: fixed;
+      bottom: 80px; right: 20px;
+      z-index: 9999;
+      background: rgba(13,12,20,0.97);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(124,43,255,0.35);
+      border-radius: 16px;
+      padding: 20px;
+      width: 260px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,43,255,0.10);
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #unified-tweaks.tw-visible { display: flex; }
+    .ut-title {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+    }
+    .ut-close {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: none; color: rgba(255,255,255,0.5);
+      font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ut-section-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.30);
+      margin-bottom: 8px; display: block;
+      font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+    }
+    .ut-seg { display: flex; gap: 4px; }
+    .ut-btn {
+      flex: 1; padding: 7px 4px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.45);
+      font-size: 11px; font-weight: 600;
+      cursor: pointer; text-align: center;
+      font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+      transition: all 0.15s ease;
+    }
+    .ut-btn.is-active {
+      background: rgba(124,43,255,0.20);
+      border-color: rgba(124,43,255,0.50);
+      color: #a970ff;
+    }
+    .ut-desc {
+      font-size: 11px; color: rgba(255,255,255,0.28);
+      line-height: 1.5;
+      font-family: 'Inter Tight', ui-sans-serif, sans-serif;
+    }
+    .ut-divider { height: 1px; background: rgba(255,255,255,0.07); }
+  </style>
+
+  <div id="unified-tweaks">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span class="ut-title">Tweaks</span>
+      <button class="ut-close" id="ut-close">✕</button>
+    </div>
+    <div>
+      <span class="ut-section-label">Introducing SkipOwls</span>
+      <div class="ut-seg">
+        <button class="ut-btn offer-tw-btn" data-offer="timeline">Timeline</button>
+        <button class="ut-btn offer-tw-btn is-active" data-offer="chat">Chat</button>
+        <button class="ut-btn offer-tw-btn" data-offer="bento">Bento</button>
+      </div>
+      <p class="ut-desc" id="ut-offer-desc" style="margin-top:6px;">Conversational — shows the process as a live chat.</p>
+    </div>
+    <div class="ut-divider"></div>
+    <div>
+      <span class="ut-section-label">Three Steps</span>
+      <div class="ut-seg">
+        <button class="ut-btn hiw-tw-btn is-active" data-variant="timeline">Timeline</button>
+        <button class="ut-btn hiw-tw-btn" data-variant="swipe">Swipe</button>
+        <button class="ut-btn hiw-tw-btn" data-variant="bold">Bold</button>
+      </div>
+      <p class="ut-desc" id="ut-hiw-desc" style="margin-top:6px;">Vertical narrative timeline — great storytelling flow on mobile.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var panel = document.getElementById('unified-tweaks');
+      var closeBtn = document.getElementById('ut-close');
+
+      // ── Offer variants ──
+      var offerTimeline = document.getElementById('offer-section').querySelector('.offer-steps');
+      var offerChat     = document.getElementById('offerChat');
+      var offerBento    = document.getElementById('offerBento');
+      var offerChatBody = document.getElementById('offerChatBody');
+      var offerChatPlayed = false;
+
+      var chatMessages = [
+        { side: 'us',   label: 'You',       text: 'We need better contact rates. Our current list is dead.' },
+        { side: 'them', label: 'SkipOwls',  text: "Let's hop on a 15-minute call. We want to learn your verticals, your US clients, how your floor runs — before we build anything." },
+        { side: 'us',   label: 'You',       text: "That's it? Just a call?" },
+        { side: 'them', label: 'SkipOwls',  text: "That's it. We pull data built around your exact targets. Every record live-verified. Back to you in 48 hours at 3¢ per record.", stats: ['3¢ / record', '48h delivery'] },
+        { side: 'us',   label: 'You',       text: 'And if the contact rate is bad again?' },
+        { side: 'them', label: 'SkipOwls',  text: 'Most clients hit 95%+ in week one. If you drop below 90%, we make it right. No questions.' },
+      ];
+
+      function buildChat() {
+        if (offerChatPlayed) return;
+        offerChatPlayed = true;
+        offerChatBody.innerHTML = '';
+        chatMessages.forEach(function (msg, i) {
+          setTimeout(function () {
+            var existing = offerChatBody.querySelector('.chat-typing');
+            if (existing) existing.remove();
+            var el = document.createElement('div');
+            el.className = 'chat-msg chat-msg--' + msg.side;
+            var labelEl = document.createElement('span');
+            labelEl.className = 'chat-label';
+            labelEl.textContent = msg.label;
+            var bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+            bubble.textContent = msg.text;
+            el.appendChild(labelEl);
+            el.appendChild(bubble);
+            if (msg.stats) {
+              var row = document.createElement('div');
+              row.className = 'chat-stat-row';
+              msg.stats.forEach(function (s) {
+                var pill = document.createElement('span');
+                pill.className = 'chat-stat-pill';
+                pill.textContent = s;
+                row.appendChild(pill);
+              });
+              el.appendChild(row);
+            }
+            offerChatBody.appendChild(el);
+            requestAnimationFrame(function () { el.classList.add('visible'); });
+            offerChatBody.scrollTop = offerChatBody.scrollHeight;
+            if (i < chatMessages.length - 1) {
+              var t = document.createElement('div');
+              t.className = 'chat-typing chat-msg--them';
+              t.innerHTML = '<span></span><span></span><span></span>';
+              setTimeout(function () {
+                offerChatBody.appendChild(t);
+                requestAnimationFrame(function () { t.classList.add('visible'); });
+                offerChatBody.scrollTop = offerChatBody.scrollHeight;
+              }, 200);
+            }
+          }, i * 1100);
+        });
+      }
+
+      function showOfferVariant(v) {
+        offerTimeline.style.display = v === 'timeline' ? '' : 'none';
+        offerChat.style.display     = v === 'chat'     ? '' : 'none';
+        offerBento.style.display    = v === 'bento'    ? '' : 'none';
+        if (v === 'chat') buildChat();
+        document.querySelectorAll('.offer-tw-btn').forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.offer === v);
+        });
+        var descMap = {
+          timeline: 'Vertical narrative with connected steps.',
+          chat: 'Conversational — shows the process as a live chat.',
+          bento: 'Bento grid — asymmetric cards with stats and steps.',
+        };
+        document.getElementById('ut-offer-desc').textContent = descMap[v] || '';
+        window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { offerVariant: v } }, '*');
+      }
+
+      document.querySelectorAll('.offer-tw-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { showOfferVariant(btn.dataset.offer); });
+      });
+
+      // ── HIW variants ──
+      var hiwVariants = {
+        timeline: 'hiwTimeline',
+        swipe:    'hiwSwipe',
+        bold:     'hiwBold',
+      };
+
+      function showHiwVariant(v) {
+        Object.keys(hiwVariants).forEach(function (k) {
+          var el = document.getElementById(hiwVariants[k]);
+          if (el) el.style.display = k === v ? '' : 'none';
+        });
+        document.querySelectorAll('.hiw-tw-btn').forEach(function (b) {
+          b.classList.toggle('is-active', b.dataset.variant === v);
+        });
+        var descMap = {
+          timeline: 'Vertical narrative timeline — great storytelling flow on mobile.',
+          swipe:    'Swipeable cards — one step at a time, scroll-snap on mobile.',
+          bold:     'Bold stacked numbers — dramatic, minimal, high contrast.',
+        };
+        document.getElementById('ut-hiw-desc').textContent = descMap[v] || '';
+        window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { hiwVariant: v } }, '*');
+      }
+
+      document.querySelectorAll('.hiw-tw-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { showHiwVariant(btn.dataset.variant); });
+      });
+
+      // ── Panel open/close ──
+      closeBtn.addEventListener('click', function () {
+        panel.classList.remove('tw-visible');
+        window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+      });
+
+      window.addEventListener('message', function (e) {
+        if (!e.data) return;
+        if (e.data.type === '__activate_edit_mode')   panel.classList.add('tw-visible');
+        if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('tw-visible');
+      });
+
+      window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+      // Auto-play chat on load since it's the default
+      buildChat();
+    }());
+  </script>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="../assets/logo.jpg" alt="SkipOwls" class="footer__logo" />
+        <span>SkipOwls</span>
+      </div>
+      <div class="footer__contact">
+        <a href="mailto:hello@skipowls.com">hello@skipowls.com</a>
+        <a href="https://wa.me/" target="_blank" rel="noopener">WhatsApp us</a>
+      </div>
+      <div class="footer__copy">© <span id="year"></span> SkipOwls. Built for Egyptian agencies running US outbound.</div>
+    </div>
+  </footer>
+
+  <!-- ============ STICKY CTA ============ -->
+  <div class="sticky-cta" id="stickyCta" hidden>
+    <div class="sticky-cta__inner container">
+      <span class="sticky-cta__text">2,000 records free · 48h delivery · No credit card</span>
+      <a href="#claim" class="btn btn--primary" data-cta="sticky">Book a free call →</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* ── Pain section scroll animations ── */
+    (function () {
+      var blocks  = Array.from(document.querySelectorAll('[data-pain]'));
+      var closing = document.querySelector('[data-pain-close]');
+      var pending = 0; // counts how many have triggered so far in current batch
+
+      var blockObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el    = entry.target;
+          var delay = pending * 150;
+          pending++;
+          setTimeout(function () { el.classList.add('is-visible'); }, delay);
+          blockObs.unobserve(el);
+          // reset batch counter after last queued animation settles
+          setTimeout(function () { pending = Math.max(0, pending - 1); }, delay + 600);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -10px 0px' });
+
+      blocks.forEach(function (b) { blockObs.observe(b); });
+
+      if (closing) {
+        var closeObs = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          setTimeout(function () { closing.classList.add('is-visible'); }, 300);
+          closeObs.unobserve(closing);
+        }, { threshold: 0.2 });
+        closeObs.observe(closing);
+      }
+    }());
+  </script>
+  <script>
+    /* ── Bridge section animation ── */
+    (function () {
+      var section  = document.getElementById('bridge-section');
+      if (!section) return;
+
+      var label    = section.querySelector('[data-bridge-label]');
+      var phrases  = Array.from(section.querySelectorAll('[data-bridge-phrase]'));
+      var words    = phrases.map(function (p) { return p.querySelector('.bridge-word'); });
+      var rightCol = section.querySelector('[data-bridge-right]');
+      var line2    = section.querySelector('[data-bridge-h2]');
+      var fired    = false;
+
+      function runSequence() {
+        if (fired) return;
+        fired = true;
+
+        /* 0 — "The problem is not:" label fades in first (mobile only — no-op on desktop since display:none) */
+        var phraseStart = 0;
+        if (label) {
+          label.classList.add('is-visible');
+          phraseStart = 400; /* wait for label to fully appear before phrases begin */
+        }
+
+        /* 1 — Left text fades in, staggered 200ms */
+        phrases.forEach(function (ph, i) {
+          setTimeout(function () { ph.classList.add('is-visible'); }, phraseStart + i * 200);
+        });
+
+        /* All text visible after label delay + last phrase delay + 400ms duration */
+        var textDone = phraseStart + (phrases.length - 1) * 200 + 400;
+
+        /* 2 — Strikethroughs animate left-to-right, staggered 150ms */
+        words.forEach(function (w, i) {
+          setTimeout(function () { w.classList.add('is-struck'); }, textDone + i * 150);
+        });
+
+        /* All strikethroughs done after last one's delay + 300ms duration */
+        var struckDone = textDone + (words.length - 1) * 150 + 300;
+
+        /* 3 — Right column slides in */
+        setTimeout(function () {
+          rightCol.classList.add('is-visible');
+          /* Line 2 fades in 400ms after right column starts */
+          setTimeout(function () { line2.classList.add('is-visible'); }, 400);
+        }, struckDone);
+      }
+
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0].intersectionRatio >= 0.4) {
+          runSequence();
+          obs.disconnect();
+        }
+      }, { threshold: [0, 0.4] });
+
+      obs.observe(section);
+    }());
+  </script>
+</body>
+</html>
