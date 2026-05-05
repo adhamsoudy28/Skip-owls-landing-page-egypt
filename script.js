@@ -135,10 +135,8 @@ function initForm() {
 
       if (!res.ok) throw new Error("Worker returned " + res.status);
 
-      // Show success state
-      form.hidden = true;
-      success.hidden = false;
-      success.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Redirect to booking page
+      window.location.href = "/book";
 
     } catch (err) {
       console.error("[SkipOwls] Submission error:", err);

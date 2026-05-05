@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're All Set — SkipOwls</title>
+  <meta name="description" content="Your discovery call is booked. We'll send you 2,000 free records within 48 hours." />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <style>
+    :root {
+      --bg: #05060B;
+      --purple: #7C2CFF;
+      --purple-soft: #a970ff;
+      --gold: #F6C25A;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background:
+        radial-gradient(800px 500px at 50% 30%, rgba(124, 44, 255, 0.12), transparent 65%),
+        var(--bg);
+      color: #F5F7FA;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #F5F7FA;
+    }
+    .brand__logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .brand__name {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    /* Main */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px 80px;
+      max-width: 560px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Checkmark */
+    .check-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(124, 44, 255, 0.12);
+      border: 2px solid rgba(124, 44, 255, 0.40);
+      box-shadow: 0 0 0 8px rgba(124, 44, 255, 0.06), 0 0 40px rgba(124, 44, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      animation: check-pop 0.5s ease-out;
+    }
+    .check-wrap svg {
+      width: 36px;
+      height: 36px;
+      color: var(--purple-soft);
+    }
+    @keyframes check-pop {
+      0%   { transform: scale(0.5); opacity: 0; }
+      60%  { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .headline {
+      font-size: clamp(26px, 6vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .headline .accent {
+      background: linear-gradient(90deg, var(--purple-soft), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subline {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    /* Steps */
+    .next-steps {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      padding: 28px 24px;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+    .next-steps__title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.35);
+      margin-bottom: 20px;
+    }
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .step-row:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: rgba(124, 44, 255, 0.15);
+      border: 1px solid rgba(124, 44, 255, 0.35);
+      color: var(--purple-soft);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-text {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.70);
+      line-height: 1.55;
+      padding-top: 4px;
+    }
+    .step-text strong {
+      color: #fff;
+      font-weight: 650;
+    }
+
+    /* WhatsApp CTA */
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 650;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(37, 211, 102, 0.30);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin-bottom: 16px;
+    }
+    .wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(37, 211, 102, 0.40);
+      color: #fff;
+    }
+    .wa-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .back-link {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.40);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(255, 255, 255, 0.20);
+    }
+    .back-link:hover {
+      color: rgba(255, 255, 255, 0.70);
+      text-decoration-color: rgba(255, 255, 255, 0.50);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.25);
+      border-top: 1px solid var(--border);
+    }
+    .footer a {
+      color: var(--purple-soft);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../" class="brand">
+      <img src="../assets/logo.jpg" alt="SkipOwls" class="brand__logo" />
+      <span class="brand__name">SkipOwls</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <div class="check-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h1 class="headline">You're all set. <span class="accent">Talk soon.</span></h1>
+    <p class="subline">Your call is booked. Check your email for the confirmation and calendar invite.</p>
+
+    <div class="next-steps">
+      <p class="next-steps__title">What happens next</p>
+      <div class="step-row">
+        <span class="step-num">1</span>
+        <p class="step-text"><strong>Check your inbox</strong> — you'll get a calendar invite with the meeting link.</p>
+      </div>
+      <div class="step-row">
+        <span class="step-num">2</span>
+        <p class="step-text"><strong>On the call</strong> — we'll discuss your campaigns, volume, and verticals. 15 minutes.</p>
+      </div>
+      <div class="step-row">
+        <span class="step-num">3</span>
+        <p class="step-text"><strong>After the call</strong> — we send you 2,000 free records within 48 hours. You test them live.</p>
+      </div>
+    </div>
+
+    <a href="https://wa.me/" class="wa-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.329 0-4.502-.737-6.281-2.027l-.438-.33-3.256 1.092 1.092-3.256-.33-.438A9.958 9.958 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+      Message us on WhatsApp
+    </a>
+
+    <a href="../" class="back-link">Back to homepage</a>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> SkipOwls &middot; <a href="mailto:hello@skipowls.com">hello@skipowls.com</a></p>
+  </footer>
+
+  <script>
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
