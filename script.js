@@ -4,7 +4,7 @@
    ========================================================= */
 
 const WORKER_URL   = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
-const CALENDAR_URL = "https://cal.com/";
+const CALENDAR_URL = "/book";
 
 // ----------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {

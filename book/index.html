@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Call — SkipOwls</title>
+  <meta name="description" content="Book a free 15-minute discovery call with SkipOwls. Get your 2,000 free records and see the connection rates yourself." />
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg" />
+  <style>
+    :root {
+      --bg: #05060B;
+      --purple: #7C2CFF;
+      --purple-soft: #a970ff;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background:
+        radial-gradient(800px 500px at 50% -5%, rgba(124, 44, 255, 0.15), transparent 65%),
+        var(--bg);
+      color: #F5F7FA;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #F5F7FA;
+    }
+    .brand__logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .brand__name {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 20px 60px;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .headline {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      text-align: center;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .subline {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.50);
+      text-align: center;
+      line-height: 1.55;
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    /* Trust pills */
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 6px 14px;
+    }
+    .trust-pill__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple-soft);
+    }
+
+    /* Calendar embed wrapper */
+    .calendar-wrap {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 600px;
+    }
+    .calendar-wrap iframe {
+      width: 100%;
+      min-height: 650px;
+      border: none;
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.25);
+      border-top: 1px solid var(--border);
+    }
+    .footer a {
+      color: var(--purple-soft);
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="../" class="brand">
+      <img src="../assets/logo.jpg" alt="SkipOwls" class="brand__logo" />
+      <span class="brand__name">SkipOwls</span>
+    </a>
+  </header>
+
+  <main class="main">
+    <h1 class="headline">Book Your Free Discovery Call</h1>
+    <p class="subline">Pick a time that works for you. 15 minutes. We'll discuss your campaigns, send you 2,000 free records, and show you the difference.</p>
+
+    <div class="trust-row">
+      <span class="trust-pill"><span class="trust-pill__dot"></span> 15 min call</span>
+      <span class="trust-pill"><span class="trust-pill__dot"></span> No commitment</span>
+      <span class="trust-pill"><span class="trust-pill__dot"></span> 2,000 free records</span>
+    </div>
+
+    <div class="calendar-wrap">
+      <iframe src="https://api.leadconnectorhq.com/widget/booking/TAn1OcIA11QIvZ00QHPZ" scrolling="no" id="TAn1OcIA11QIvZ00QHPZ_1777952980550"></iframe>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> SkipOwls &middot; <a href="mailto:hello@skipowls.com">hello@skipowls.com</a></p>
+  </footer>
+
+  <script src="https://api.leadconnectorhq.com/js/form_embed.js" type="text/javascript"></script>
+  <script>
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
