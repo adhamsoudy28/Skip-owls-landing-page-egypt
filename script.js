@@ -3,15 +3,13 @@
    Vanilla JS, no dependencies.
    ========================================================= */
 
-const WORKER_URL   = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
-const CALENDAR_URL = "/book";
+const WORKER_URL = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
 
 // ----------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   initYear();
   initPhoneField();
   initForm();
-  initBookNowLink();
 });
 
 /* ---------- Footer year ---------- */
@@ -178,8 +176,3 @@ function validate(form) {
   return true;
 }
 
-/* ---------- Book-now link in success state ---------- */
-function initBookNowLink() {
-  const link = document.getElementById("bookNow");
-  if (link && CALENDAR_URL) link.href = CALENDAR_URL;
-}
