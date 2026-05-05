@@ -88,9 +88,8 @@ function showPhoneError(input, error, msg) {
 
 /* ---------- Form ---------- */
 function initForm() {
-  const form    = document.getElementById("claimForm");
-  const success = document.getElementById("formSuccess");
-  if (!form || !success) return;
+  const form = document.getElementById("claimForm");
+  if (!form) return;
 
   const inputs = form.querySelectorAll("input, select");
   inputs.forEach((input) => {
@@ -108,6 +107,13 @@ function initForm() {
     const formattedPhone = validatePhone();
     if (!formattedPhone) return;
 
+    // Grab all values upfront before anything changes
+    var nameVal     = document.getElementById("name").value.trim();
+    var emailVal    = document.getElementById("email").value.trim();
+    var agencyVal   = document.getElementById("agency").value.trim();
+    var verticalVal = document.getElementById("vertical").value;
+    var volumeVal   = document.getElementById("volume").value;
+
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -119,12 +125,12 @@ function initForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          full_name: document.getElementById("name").value.trim(),
-          email:     document.getElementById("email").value.trim(),
+          full_name: nameVal,
+          email:     emailVal,
           phone:     formattedPhone,
-          agency:    document.getElementById("agency").value.trim(),
-          vertical:  document.getElementById("vertical").value,
-          volume:    document.getElementById("volume").value,
+          agency:    agencyVal,
+          vertical:  verticalVal,
+          volume:    volumeVal,
         })
       });
 
@@ -134,12 +140,7 @@ function initForm() {
       if (!res.ok) throw new Error("Worker returned " + res.status);
 
       // Redirect to booking page with pre-filled data
-      var params = new URLSearchParams({
-        name:  document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: formattedPhone
-      });
-      window.location.href = "/book?" + params.toString();
+      window.location.href = "/book?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
 
     } catch (err) {
       console.error("[SkipOwls] Submission error:", err);
