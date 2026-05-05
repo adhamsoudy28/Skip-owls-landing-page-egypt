@@ -3,12 +3,13 @@
    Vanilla JS, no dependencies.
    ========================================================= */
 
-const WORKER_URL  = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
+const WORKER_URL   = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
 const CALENDAR_URL = "https://cal.com/";
 
 // ----------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   initYear();
+  initPhoneField();
   initForm();
   initBookNowLink();
 });
@@ -19,12 +20,86 @@ function initYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
-/* ---------- Phone formatter — Egyptian numbers to E.164 ---------- */
-function formatPhone(raw) {
-  var digits = raw.replace(/\D/g, '');
-  if (digits.startsWith('0')) digits = '20' + digits.slice(1); // 01X → 201X
-  if (!digits.startsWith('+')) digits = '+' + digits;          // 201X → +201X
-  return digits;
+/* ---------- Phone field — digits only, live validation ---------- */
+function initPhoneField() {
+  const input = document.getElementById("phone");
+  const error = document.getElementById("phoneError");
+  if (!input) return;
+
+  // Only allow digits — block letters and special characters
+  input.addEventListener("input", () => {
+    input.value = input.value.replace(/[^\d]/g, "");
+    input.classList.remove("is-invalid");
+    if (error) error.hidden = true;
+  });
+
+  // Prevent pasting non-numeric characters
+  input.addEventListener("paste", (e) => {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData("text");
+    input.value = pasted.replace(/[^\d]/g, "");
+  });
+
+  // Block letter keys from even registering
+  input.addEventListener("keypress", (e) => {
+    if (!/[\d]/.test(e.key) && e.key !== "Backspace" && e.key !== "Tab" && e.key !== "Enter") {
+      e.preventDefault();
+    }
+  });
+}
+
+/* ---------- Phone validation ---------- */
+function validatePhone() {
+  const code  = document.getElementById("phoneCode").value;
+  const input = document.getElementById("phone");
+  const error = document.getElementById("phoneError");
+  const raw   = input.value.trim();
+
+  // Strip leading zero (common in Egyptian numbers)
+  const digits = raw.replace(/^0+/, "");
+
+  if (!digits) {
+    showPhoneError(input, error, "Please enter your phone number.");
+    return null;
+  }
+
+  if (digits.length < 7) {
+    showPhoneError(input, error, "Number is too short.");
+    return null;
+  }
+
+  if (digits.length > 15) {
+    showPhoneError(input, error, "Number is too long.");
+    return null;
+  }
+
+  // Check for obviously fake patterns
+  if (/^(\d)\1{6,}$/.test(digits)) {
+    showPhoneError(input, error, "Please enter a real phone number.");
+    return null;
+  }
+
+  // Egypt-specific: mobile numbers should be 10 digits (without leading 0)
+  if (code === "+20" && digits.length !== 10) {
+    showPhoneError(input, error, "Egyptian numbers should be 10 digits (e.g. 1012345678).");
+    return null;
+  }
+
+  // US-specific: should be 10 digits
+  if (code === "+1" && digits.length !== 10) {
+    showPhoneError(input, error, "US numbers should be 10 digits.");
+    return null;
+  }
+
+  return code + digits;
+}
+
+function showPhoneError(input, error, msg) {
+  input.classList.add("is-invalid");
+  if (error) {
+    error.textContent = msg;
+    error.hidden = false;
+  }
 }
 
 /* ---------- Form ---------- */
@@ -41,7 +116,13 @@ function initForm() {
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    // Validate all standard fields first
     if (!validate(form)) return;
+
+    // Validate phone separately (smart validation)
+    const formattedPhone = validatePhone();
+    if (!formattedPhone) return;
 
     const submitBtn = form.querySelector('button[type="submit"]');
     if (submitBtn) {
@@ -56,7 +137,7 @@ function initForm() {
         body: JSON.stringify({
           full_name: document.getElementById("name").value.trim(),
           email:     document.getElementById("email").value.trim(),
-          phone:     formatPhone(document.getElementById("phone").value.trim()),
+          phone:     formattedPhone,
           agency:    document.getElementById("agency").value.trim(),
           vertical:  document.getElementById("vertical").value,
           volume:    document.getElementById("volume").value,
@@ -88,6 +169,9 @@ function validate(form) {
   let firstInvalid = null;
 
   form.querySelectorAll("[required]").forEach((input) => {
+    // Skip phone — validated separately
+    if (input.id === "phone") return;
+
     const value = (input.value || "").trim();
     let invalid = !value;
 

@@ -2108,13 +2108,56 @@
             <input class="form__input" type="text" id="name" name="name" required />
           </div>
           <div class="form__row">
+            <label class="form__label" for="phone">WhatsApp number</label>
+            <div class="phone-wrap">
+              <select class="form__input phone-code" id="phoneCode">
+                <option value="+20">&#127466;&#127468; +20</option>
+                <option value="+1">&#127482;&#127480; +1</option>
+                <option value="+44">&#127468;&#127463; +44</option>
+                <option value="+971">&#127462;&#127466; +971</option>
+                <option value="+966">&#127480;&#127462; +966</option>
+                <option value="+974">&#127478;&#127462; +974</option>
+                <option value="+965">&#127472;&#127484; +965</option>
+                <option value="+968">&#127476;&#127474; +968</option>
+                <option value="+962">&#127471;&#127476; +962</option>
+                <option value="+961">&#127473;&#127463; +961</option>
+                <option value="+212">&#127474;&#127462; +212</option>
+                <option value="+91">&#127470;&#127475; +91</option>
+                <option value="+92">&#127477;&#127472; +92</option>
+                <option value="+63">&#127477;&#127469; +63</option>
+              </select>
+              <input class="form__input phone-num" type="tel" id="phone" name="phone" placeholder="1012345678" inputmode="numeric" required />
+            </div>
+            <p class="phone-error" id="phoneError" hidden></p>
+          </div>
+          <div class="form__row">
             <label class="form__label" for="email">Work email</label>
             <input class="form__input" type="email" id="email" name="email" required />
           </div>
-          <div class="form__row">
-            <label class="form__label" for="phone">WhatsApp number</label>
-            <input class="form__input" type="tel" id="phone" name="phone" placeholder="e.g. 01012345678" required />
-          </div>
+          <style>
+            .phone-wrap {
+              display: flex;
+              gap: 8px;
+            }
+            .phone-code {
+              width: 110px;
+              flex-shrink: 0;
+              padding-right: 8px !important;
+              background-image: none !important;
+              text-align: center;
+              font-size: 14px;
+            }
+            .phone-num {
+              flex: 1;
+              letter-spacing: 0.04em;
+            }
+            .phone-error {
+              font-size: 12px;
+              color: var(--danger);
+              margin-top: 6px;
+              font-family: ui-sans-serif, system-ui, sans-serif;
+            }
+          </style>
           <div class="form__row">
             <label class="form__label" for="agency">Agency name</label>
             <input class="form__input" type="text" id="agency" name="agency" required />
