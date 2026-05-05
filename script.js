@@ -3,16 +3,12 @@
    Vanilla JS, no dependencies.
    ========================================================= */
 
-// ---- Configuration (replace these with real values when ready) ----
-const VIDEO_EMBED_URL = ""; // e.g. "https://www.youtube.com/embed/XXXX?autoplay=1&rel=0"
-const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxx" or your webhook
-const CALENDAR_URL = "https://cal.com/"; // e.g. "https://cal.com/skipowls/15min"
+const WORKER_URL  = "https://skipowls-proxy.adhamsoudy03.workers.dev/";
+const CALENDAR_URL = "https://cal.com/";
 
 // ----------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   initYear();
-  initStickyCta();
-  initVideoPlaceholder();
   initForm();
   initBookNowLink();
 });
@@ -23,83 +19,28 @@ function initYear() {
   if (el) el.textContent = new Date().getFullYear();
 }
 
-/* ---------- Sticky CTA bar ---------- */
-function initStickyCta() {
-  const hero = document.getElementById("hero");
-  const sticky = document.getElementById("stickyCta");
-  const claim = document.getElementById("claim");
-  if (!hero || !sticky) return;
-
-  sticky.hidden = false;
-
-  const showSticky = () => sticky.classList.add("is-visible");
-  const hideSticky = () => sticky.classList.remove("is-visible");
-
-  // Hide when hero is in view, show otherwise.
-  const heroObserver = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) hideSticky();
-      else showSticky();
-    },
-    { threshold: 0, rootMargin: "-80px 0px 0px 0px" }
-  );
-  heroObserver.observe(hero);
-
-  // Also hide when the form/claim section is in view (no need to push to itself).
-  if (claim) {
-    const claimObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) hideSticky();
-      },
-      { threshold: 0.25 }
-    );
-    claimObserver.observe(claim);
-  }
-}
-
-/* ---------- Video placeholder ---------- */
-function initVideoPlaceholder() {
-  const card = document.getElementById("videoCard");
-  if (!card) return;
-
-  card.addEventListener("click", () => {
-    if (!VIDEO_EMBED_URL) {
-      card.innerHTML =
-        '<span style="color:#B7BCC8;font-size:14px;text-align:center;padding:0 24px;line-height:1.5;">Video coming soon. Meanwhile, scroll down for the full pitch.</span>';
-      card.style.cursor = "default";
-      return;
-    }
-    const iframe = document.createElement("iframe");
-    iframe.src = VIDEO_EMBED_URL;
-    iframe.title = "SkipOwls demo video";
-    iframe.allow =
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "0";
-    iframe.style.display = "block";
-    card.innerHTML = "";
-    card.appendChild(iframe);
-  });
+/* ---------- Phone formatter — Egyptian numbers to E.164 ---------- */
+function formatPhone(raw) {
+  var digits = raw.replace(/\D/g, '');
+  if (digits.startsWith('0')) digits = '20' + digits.slice(1); // 01X → 201X
+  if (!digits.startsWith('+')) digits = '+' + digits;          // 201X → +201X
+  return digits;
 }
 
 /* ---------- Form ---------- */
 function initForm() {
-  const form = document.getElementById("claimForm");
+  const form    = document.getElementById("claimForm");
   const success = document.getElementById("formSuccess");
   if (!form || !success) return;
 
   const inputs = form.querySelectorAll("input, select");
-
   inputs.forEach((input) => {
-    input.addEventListener("input", () => input.classList.remove("is-invalid"));
+    input.addEventListener("input",  () => input.classList.remove("is-invalid"));
     input.addEventListener("change", () => input.classList.remove("is-invalid"));
   });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     if (!validate(form)) return;
 
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -109,31 +50,36 @@ function initForm() {
     }
 
     try {
-      if (FORM_ENDPOINT) {
-        const data = new FormData(form);
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          body: data,
-          headers: { Accept: "application/json" },
-        });
-        if (!res.ok) throw new Error("Submission failed");
-      } else {
-        // No backend wired up — simulate success for preview/demo.
-        await new Promise((r) => setTimeout(r, 600));
-      }
+      const res = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: document.getElementById("name").value.trim(),
+          email:     document.getElementById("email").value.trim(),
+          phone:     formatPhone(document.getElementById("phone").value.trim()),
+          agency:    document.getElementById("agency").value.trim(),
+          vertical:  document.getElementById("vertical").value,
+          volume:    document.getElementById("volume").value,
+        })
+      });
 
-      // Swap form for success state.
+      const data = await res.json();
+      console.log("[SkipOwls] Worker response:", data);
+
+      if (!res.ok) throw new Error("Worker returned " + res.status);
+
+      // Show success state
       form.hidden = true;
       success.hidden = false;
       success.scrollIntoView({ behavior: "smooth", block: "center" });
+
     } catch (err) {
+      console.error("[SkipOwls] Submission error:", err);
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = "Try again";
       }
-      alert(
-        "Something went wrong submitting the form. Please email hello@skipowls.com and we'll get you set up."
-      );
+      alert("Something went wrong. Please email hello@skipowls.com and we'll get you set up.");
     }
   });
 }
@@ -141,8 +87,7 @@ function initForm() {
 function validate(form) {
   let firstInvalid = null;
 
-  const required = form.querySelectorAll("[required]");
-  required.forEach((input) => {
+  form.querySelectorAll("[required]").forEach((input) => {
     const value = (input.value || "").trim();
     let invalid = !value;
 
@@ -156,10 +101,7 @@ function validate(form) {
     }
   });
 
-  if (firstInvalid) {
-    firstInvalid.focus();
-    return false;
-  }
+  if (firstInvalid) { firstInvalid.focus(); return false; }
   return true;
 }
 
