@@ -135,8 +135,13 @@ function initForm() {
 
       if (!res.ok) throw new Error("Worker returned " + res.status);
 
-      // Redirect to booking page
-      window.location.href = "/book";
+      // Redirect to booking page with pre-filled data
+      var params = new URLSearchParams({
+        name:  document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: formattedPhone
+      });
+      window.location.href = "/book?" + params.toString();
 
     } catch (err) {
       console.error("[SkipOwls] Submission error:", err);

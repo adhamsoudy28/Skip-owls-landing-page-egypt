@@ -180,6 +180,33 @@
   <script>
     var y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
+
+    // Pre-fill GHL calendar from URL params
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var name   = params.get('name');
+      var email  = params.get('email');
+      var phone  = params.get('phone');
+
+      if (name || email || phone) {
+        var iframe = document.querySelector('.calendar-wrap iframe');
+        if (iframe) {
+          var src = iframe.src;
+          var sep = src.indexOf('?') === -1 ? '?' : '&';
+          if (name) {
+            var parts = name.split(' ');
+            src += sep + 'first_name=' + encodeURIComponent(parts[0]);
+            sep = '&';
+            if (parts.length > 1) {
+              src += '&last_name=' + encodeURIComponent(parts.slice(1).join(' '));
+            }
+          }
+          if (email) src += sep + 'email=' + encodeURIComponent(email);
+          if (phone) src += (sep || '&') + 'phone=' + encodeURIComponent(phone);
+          iframe.src = src;
+        }
+      }
+    })();
   </script>
 </body>
 </html>
