@@ -2713,9 +2713,9 @@
 
         /* 3 — Right column slides in */
         setTimeout(function () {
-          rightCol.classList.add('is-visible');
+          if (rightCol) rightCol.classList.add('is-visible');
           /* Line 2 fades in 400ms after right column starts */
-          setTimeout(function () { line2.classList.add('is-visible'); }, 400);
+          setTimeout(function () { if (line2) line2.classList.add('is-visible'); }, 400);
         }, struckDone);
       }
 
