@@ -120,8 +120,11 @@ function initForm() {
       submitBtn.textContent = "Sending…";
     }
 
+    // Build redirect URL before fetch so it's ready
+    var redirectURL = "/book?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
+
     try {
-      const res = await fetch(WORKER_URL, {
+      await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -133,23 +136,12 @@ function initForm() {
           volume:    volumeVal,
         })
       });
-
-      const data = await res.json();
-      console.log("[SkipOwls] Worker response:", data);
-
-      if (!res.ok) throw new Error("Worker returned " + res.status);
-
-      // Redirect to booking page with pre-filled data
-      window.location.href = "/book?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
-
     } catch (err) {
-      console.error("[SkipOwls] Submission error:", err);
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Try again";
-      }
-      alert("Something went wrong. Please email hello@skipowls.com and we'll get you set up.");
+      console.warn("[SkipOwls] Worker error (still redirecting):", err);
     }
+
+    // Always redirect — even if Worker had an issue
+    window.location.href = redirectURL;
   });
 }
 
