@@ -55,42 +55,28 @@ function validatePhone() {
   const error = document.getElementById("phoneError");
   const raw   = input.value.trim();
 
-  // Strip leading zero (common in Egyptian numbers)
-  const digits = raw.replace(/^0+/, "");
+  // Strip leading zeros silently
+  var digits = raw.replace(/^0+/, "");
 
+  // Empty check
   if (!digits) {
     showPhoneError(input, error, "Please enter your phone number.");
     return null;
   }
 
+  // Too short — only block if clearly not a real number
   if (digits.length < 7) {
     showPhoneError(input, error, "Number is too short.");
     return null;
   }
 
-  if (digits.length > 15) {
-    showPhoneError(input, error, "Number is too long.");
-    return null;
-  }
-
-  // Check for obviously fake patterns
+  // Block obviously fake patterns (e.g. 1111111111)
   if (/^(\d)\1{6,}$/.test(digits)) {
     showPhoneError(input, error, "Please enter a real phone number.");
     return null;
   }
 
-  // Egypt-specific: mobile numbers should be 10 digits (without leading 0)
-  if (code === "+20" && digits.length !== 10) {
-    showPhoneError(input, error, "Egyptian numbers should be 10 digits (e.g. 1012345678).");
-    return null;
-  }
-
-  // US-specific: should be 10 digits
-  if (code === "+1" && digits.length !== 10) {
-    showPhoneError(input, error, "US numbers should be 10 digits.");
-    return null;
-  }
-
+  // Everything else — accept it and let GHL handle formatting
   return code + digits;
 }
 
