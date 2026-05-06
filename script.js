@@ -134,7 +134,7 @@ function initForm() {
     if (typeof fbq === "function") fbq("track", "Lead");
 
     // Redirect immediately — don't wait for worker
-    window.location.replace("/book/?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone));
+    window.location.replace("/book/?full_name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone));
   });
 }
 
