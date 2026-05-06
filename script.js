@@ -120,13 +120,21 @@ function initForm() {
       submitBtn.textContent = "Sending…";
     }
 
-    // Build redirect URL before fetch so it's ready
-    var redirectURL = "/book?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
+    // Show success state immediately so user isn't staring at a frozen button
+    form.hidden = true;
+    var successDiv = document.getElementById("formSuccess");
+    if (successDiv) successDiv.hidden = false;
+
+    // Fire worker in background — don't let it block the redirect
+    var redirectURL = "book/?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
       await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           full_name: nameVal,
           email:     emailVal,
@@ -136,6 +144,7 @@ function initForm() {
           volume:    volumeVal,
         })
       });
+      clearTimeout(timeoutId);
     } catch (err) {
       console.warn("[SkipOwls] Worker error (still redirecting):", err);
     }
