@@ -130,6 +130,9 @@ function initForm() {
       console.warn("[SkipOwls] Worker error:", err);
     });
 
+    // Fire Meta Pixel Lead event before redirect
+    if (typeof fbq === "function") fbq("track", "Lead");
+
     // Redirect immediately — don't wait for worker
     window.location.replace("/book/?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone));
   });
