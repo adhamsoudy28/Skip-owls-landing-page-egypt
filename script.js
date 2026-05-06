@@ -97,60 +97,41 @@ function initForm() {
     input.addEventListener("change", () => input.classList.remove("is-invalid"));
   });
 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", function(e) {
     e.preventDefault();
 
     // Validate all standard fields first
     if (!validate(form)) return;
 
     // Validate phone separately (smart validation)
-    const formattedPhone = validatePhone();
+    var formattedPhone = validatePhone();
     if (!formattedPhone) return;
 
-    // Grab all values upfront before anything changes
+    // Grab all values upfront
     var nameVal     = document.getElementById("name").value.trim();
     var emailVal    = document.getElementById("email").value.trim();
     var agencyVal   = document.getElementById("agency").value.trim();
     var verticalVal = document.getElementById("vertical").value;
     var volumeVal   = document.getElementById("volume").value;
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
-    }
+    // Fire worker in background — do NOT await, never block redirect
+    fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        full_name: nameVal,
+        email:     emailVal,
+        phone:     formattedPhone,
+        agency:    agencyVal,
+        vertical:  verticalVal,
+        volume:    volumeVal,
+      })
+    }).catch(function(err) {
+      console.warn("[SkipOwls] Worker error:", err);
+    });
 
-    // Show success state immediately so user isn't staring at a frozen button
-    form.hidden = true;
-    var successDiv = document.getElementById("formSuccess");
-    if (successDiv) successDiv.hidden = false;
-
-    // Fire worker in background — don't let it block the redirect
-    var redirectURL = "book/?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone);
-
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
-      await fetch(WORKER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        signal: controller.signal,
-        body: JSON.stringify({
-          full_name: nameVal,
-          email:     emailVal,
-          phone:     formattedPhone,
-          agency:    agencyVal,
-          vertical:  verticalVal,
-          volume:    volumeVal,
-        })
-      });
-      clearTimeout(timeoutId);
-    } catch (err) {
-      console.warn("[SkipOwls] Worker error (still redirecting):", err);
-    }
-
-    // Always redirect — even if Worker had an issue
-    window.location.href = redirectURL;
+    // Redirect immediately — don't wait for worker
+    window.location.replace("/book/?name=" + encodeURIComponent(nameVal) + "&email=" + encodeURIComponent(emailVal) + "&phone=" + encodeURIComponent(formattedPhone));
   });
 }
 
